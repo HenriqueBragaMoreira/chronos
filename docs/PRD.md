@@ -97,24 +97,24 @@ FASE 1 — SETUP & INFRAESTRUTURA
 FASE 2 — MODELS & STRUCTS RUST (API)
 ================================================================================
 
-2.1  [not started] Criar struct Task com derive Serialize/Deserialize
+2.1  [done] Criar struct Task com derive Serialize/Deserialize
      - Campos mapeados 1:1 com tabela tasks
      - Usar chrono::NaiveDate para due_date, Option<NaiveTime> para due_time
      - Usar uuid::Uuid para id
      - Refs: FR-001, FR-028
 
-2.2  [not started] Criar struct TaskOccurrence com derive Serialize/Deserialize
+2.2  [done] Criar struct TaskOccurrence com derive Serialize/Deserialize
      - Campos mapeados 1:1 com tabela task_occurrences
      - Campo derivado overdue_since calculado em runtime
      - Refs: FR-008, BR-002
 
-2.3  [not started] Criar struct CreateTaskRequest para input de criação
+2.3  [done] Criar struct CreateTaskRequest para input de criação
      - Todos os campos exceto id, is_deleted e timestamps
      - Validação: name não vazio, due_date obrigatório
      - recurrence_value obrigatório quando recurrence_type != none
      - Refs: FR-001, FR-006
 
-2.4  [not started] Criar struct UpdateTaskRequest para input de edição
+2.4  [done] Criar struct UpdateTaskRequest para input de edição
      - Todos os campos como Option<T> (partial update)
      - id obrigatório para identificar a tarefa
      - Refs: FR-002
