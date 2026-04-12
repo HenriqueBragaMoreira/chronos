@@ -18,3 +18,25 @@ pub struct Task {
     pub created_at: chrono::DateTime<chrono::Utc>,
     pub updated_at: chrono::DateTime<chrono::Utc>,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
+pub struct TaskOccurrence {
+    pub id: Uuid,
+    pub task_id: Uuid,
+    pub due_date: NaiveDate,
+    pub completed: bool,
+    pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
+    pub created_at: chrono::DateTime<chrono::Utc>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TaskWithOccurrence {
+    #[serde(flatten)]
+    pub task: Task,
+    pub occurrence_id: Uuid,
+    pub occurrence_due_date: NaiveDate,
+    pub completed: bool,
+    pub completed_at: Option<chrono::DateTime<chrono::Utc>>,
+    pub status: String,
+    pub overdue_days: Option<i64>,
+}
