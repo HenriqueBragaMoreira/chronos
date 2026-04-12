@@ -119,13 +119,13 @@ FASE 2 — MODELS & STRUCTS RUST (API)
      - id obrigatório para identificar a tarefa
      - Refs: FR-002
 
-2.5  [not started] Criar struct TaskWithOccurrence para resposta combinada
+2.5  [done] Criar struct TaskWithOccurrence para resposta combinada
      - Task + occurrence atual (pendente ou atrasada)
      - Status derivado: pending, completed, overdue
      - Campo overdue_days: Option<i64> para exibição no frontend
      - Refs: BR-004, FR-005, FR-008
 
-2.6  [not started] Criar struct Settings com derive Serialize/Deserialize
+2.6  [done] Criar struct Settings com derive Serialize/Deserialize
      - Campos mapeados 1:1 com tabela settings
      - Refs: FR-025, FR-026, FR-027
 

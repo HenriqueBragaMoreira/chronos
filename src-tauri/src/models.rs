@@ -65,3 +65,22 @@ pub struct UpdateTaskRequest {
     pub recurrence_type: Option<String>,
     pub recurrence_value: Option<i32>,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
+pub struct Settings {
+    pub id: i32,
+    pub notification_time: NaiveTime,
+    pub notification_sound_enabled: bool,
+    pub theme: String,
+    pub default_view: String,
+    pub created_at: chrono::DateTime<chrono::Utc>,
+    pub updated_at: chrono::DateTime<chrono::Utc>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct UpdateSettingsRequest {
+    pub notification_time: Option<NaiveTime>,
+    pub notification_sound_enabled: Option<bool>,
+    pub theme: Option<String>,
+    pub default_view: Option<String>,
+}
