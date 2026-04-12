@@ -129,7 +129,7 @@ FASE 2 — MODELS & STRUCTS RUST (API)
      - Campos mapeados 1:1 com tabela settings
      - Refs: FR-025, FR-026, FR-027
 
-2.7  [not started] Criar enums para tipos com variantes fixas
+2.7  [done] Criar enums para tipos com variantes fixas
      - RecurrenceType: None, Weekly, Interval, Monthly
      - Priority: Low, Medium, High
      - Theme: Light, Dark, System
