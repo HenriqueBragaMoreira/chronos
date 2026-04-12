@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "skills": {
+    "ai-repo-setup": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "a56b8d99f6e6eb6a253206631866f840affa87727f9f3aeb09871add627ee7e9"
+    },
+    "clean-code": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "621729bdca70f20330723d0fa8650dfef1ceb8eef1e40697df302736c4c88133"
+    },
+    "commit-work": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "88cec816d028de357ae7ede3ace36a2bc235a225e3e7d2bb18cdb5190ab6c482"
+    },
+    "docker": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "c7c98ee7c4215dcfebe074b529148bfbb9d5e679a6d6e4f3da8614dfdcfb26af"
+    },
+    "fixing-accessibility": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "4fa8f5a772b4eef3d28a54c136b507d070e54e2c326578f65eaf5e5a0118b38a"
+    },
+    "fixing-metadata": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "699e13890fb50acffa02dfd2d5b0e719bd916a9e2b7e6035bdc4513fc73d9174"
+    },
+    "fixing-motion-performance": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "426dcf33f23419643f2aab71e2253e1a5b5684a808fabb8a4ad135e489ed7a0f"
+    },
+    "frontend-design": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "e8118284a6365753790d44bb2758a6032b3af27fa84696428d9233f2be0f4e78"
+    },
+    "interaction-design": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "32a25c963536232dcfb310920a821e7a9a879a5b4fe8fdbd4f9469e187d5c68f"
+    },
+    "interface-design": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "d004c5e5e2e7132e1d64e9c2a339db7f7aaa69053a5c19cddc210dd35dd6fff5"
+    },
+    "motion": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "990abca205ab4019b6e48e65d7d4c8385f200bc61d1768b4ed6c78947a029159"
+    },
+    "pnpm": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "318f9fca2441a3e06fedc336e195dd18be5dbe901064e4fa71b76b40b096ab3a"
+    },
+    "react-best-practices": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "7e2990adbf7ea039c3d10e57672f3d5f27f0e6b8f1c41409f8374dbf00e3955a"
+    },
+    "react-hook-form-zod": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "0aa68907904377363b3ac9e65c9cb8a10d428e2c5ed666883d8b9ab6450ed34d"
+    },
+    "rust-expert": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "a329d285e4dcbb2c50754780c7e2518ce369ee362f94bd2f759a78b2764240bd"
+    },
+    "shadcn": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "cd3f24570ecef1a6b0573921c3dab6588c61ac5ac634f96e771f071e33be7224"
+    },
+    "tanstack-query": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "5df352ae432e329752b0c02f6ab7f22b1ae29d790fc6ccb586a68f1e718fcd45"
+    },
+    "tauri": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "34a838d8ce50177cc6e4207a17da84262c66cbc15c5d25b98c5e9a2912752d65"
+    },
+    "ui-ux-pro-max": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "896930edd510abcf3da34a0276f21c64f85b6ad97a83d1b2201d18ed88fab660"
+    },
+    "zod": {
+      "source": "fellipeutaka/leon",
+      "sourceType": "github",
+      "computedHash": "355160ccffc185df41c4e3dca88dd51f50b22931c889e06048546fff4e637bf5"
+    }
+  }
+}
