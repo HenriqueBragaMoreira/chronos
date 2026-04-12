@@ -1,4 +1,5 @@
 mod db;
+mod models;
 
 use sqlx::PgPool;
 use tauri::Manager;
