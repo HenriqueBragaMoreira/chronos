@@ -141,7 +141,7 @@ FASE 2 — MODELS & STRUCTS RUST (API)
 FASE 3 — TAURI COMMANDS: CRUD DE TAREFAS (API)
 ================================================================================
 
-3.1  [not started] Implementar command create_task
+3.1  [done] Implementar command create_task
      - Receber CreateTaskRequest, inserir na tabela tasks
      - Gerar primeira task_occurrence com due_date da tarefa
      - Retornar Task criada
