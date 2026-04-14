@@ -155,7 +155,7 @@ FASE 3 — TAURI COMMANDS: CRUD DE TAREFAS (API)
      - Excluir tarefas com is_deleted = true
      - Refs: FR-005, BR-004
 
-3.3  [not started] Implementar command get_task por id
+3.3  [done] Implementar command get_task por id
      - Buscar tarefa + occurrence atual
      - Retornar TaskWithOccurrence
      - Refs: FR-002

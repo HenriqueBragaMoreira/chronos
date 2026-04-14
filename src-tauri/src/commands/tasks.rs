@@ -1,6 +1,7 @@
 use chrono::{NaiveDate, Utc};
+use uuid::Uuid;
 
-use crate::models::{CreateTaskRequest, Task, TaskWithOccurrence};
+use crate::models::{CreateTaskRequest, Task, TaskWithOccurrence, UpdateTaskRequest};
 use crate::AppState;
 
 #[tauri::command]
@@ -160,4 +161,73 @@ pub async fn get_tasks(
     }
 
     Ok(tasks)
+}
+
+#[tauri::command]
+pub async fn get_task(
+    state: tauri::State<'_, AppState>,
+    id: Uuid,
+) -> Result<TaskWithOccurrence, String> {
+    let today = Utc::now().date_naive();
+
+    let row = sqlx::query_as::<_, (
+        Uuid, String, Option<String>, Option<String>, String,
+        NaiveDate, Option<chrono::NaiveTime>, String, Option<i32>, bool,
+        chrono::DateTime<chrono::Utc>, chrono::DateTime<chrono::Utc>,
+        Uuid, NaiveDate, bool, Option<chrono::DateTime<chrono::Utc>>,
+    )>(
+        r#"
+        SELECT t.id, t.name, t.description, t.category, t.priority,
+               t.due_date, t.due_time, t.recurrence_type, t.recurrence_value,
+               t.is_deleted, t.created_at, t.updated_at,
+               o.id as occurrence_id, o.due_date as occurrence_due_date,
+               o.completed, o.completed_at
+        FROM tasks t
+        INNER JOIN task_occurrences o ON o.task_id = t.id
+        WHERE t.id = $1 AND t.is_deleted = false
+        ORDER BY o.due_date DESC
+        LIMIT 1
+        "#,
+    )
+    .bind(id)
+    .fetch_one(&state.db)
+    .await
+    .map_err(|e| format!("Task not found: {}", e))?;
+
+    let status = if row.14 {
+        "completed".to_string()
+    } else if row.13 < today {
+        "overdue".to_string()
+    } else {
+        "pending".to_string()
+    };
+
+    let overdue_days = if !row.14 && row.13 < today {
+        Some((today - row.13).num_days())
+    } else {
+        None
+    };
+
+    Ok(TaskWithOccurrence {
+        task: Task {
+            id: row.0,
+            name: row.1,
+            description: row.2,
+            category: row.3,
+            priority: row.4,
+            due_date: row.5,
+            due_time: row.6,
+            recurrence_type: row.7,
+            recurrence_value: row.8,
+            is_deleted: row.9,
+            created_at: row.10,
+            updated_at: row.11,
+        },
+        occurrence_id: row.12,
+        occurrence_due_date: row.13,
+        completed: row.14,
+        completed_at: row.15,
+        status,
+        overdue_days,
+    })
 }
