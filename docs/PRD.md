@@ -184,7 +184,7 @@ FASE 3 — TAURI COMMANDS: CRUD DE TAREFAS (API)
      - Retornar lista de strings para autocomplete no frontend
      - Refs: BR-015
 
-3.8  [not started] Registrar todos os commands no invoke_handler do Tauri
+3.8  [done] Registrar todos os commands no invoke_handler do Tauri
      - Adicionar ao tauri::generate_handler![]
      - Remover command greet placeholder
      - Refs: FR-028
