@@ -160,7 +160,7 @@ FASE 3 — TAURI COMMANDS: CRUD DE TAREFAS (API)
      - Retornar TaskWithOccurrence
      - Refs: FR-002
 
-3.4  [not started] Implementar command update_task
+3.4  [done] Implementar command update_task
      - Receber UpdateTaskRequest, atualizar campos não-nulos
      - Se recurrence_type mudar, recalcular próxima occurrence
      - Atualizar updated_at

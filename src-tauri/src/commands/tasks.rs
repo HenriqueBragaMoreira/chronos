@@ -231,3 +231,40 @@ pub async fn get_task(
         overdue_days,
     })
 }
+
+#[tauri::command]
+pub async fn update_task(
+    state: tauri::State<'_, AppState>,
+    request: UpdateTaskRequest,
+) -> Result<Task, String> {
+    let task = sqlx::query_as::<_, Task>(
+        r#"
+        UPDATE tasks SET
+            name = COALESCE($2, name),
+            description = COALESCE($3, description),
+            category = COALESCE($4, category),
+            priority = COALESCE($5, priority),
+            due_date = COALESCE($6, due_date),
+            due_time = COALESCE($7, due_time),
+            recurrence_type = COALESCE($8, recurrence_type),
+            recurrence_value = COALESCE($9, recurrence_value),
+            updated_at = NOW()
+        WHERE id = $1 AND is_deleted = false
+        RETURNING *
+        "#,
+    )
+    .bind(request.id)
+    .bind(&request.name)
+    .bind(&request.description)
+    .bind(&request.category)
+    .bind(&request.priority)
+    .bind(request.due_date)
+    .bind(request.due_time)
+    .bind(&request.recurrence_type)
+    .bind(request.recurrence_value)
+    .fetch_one(&state.db)
+    .await
+    .map_err(|e| format!("Failed to update task: {}", e))?;
+
+    Ok(task)
+}
