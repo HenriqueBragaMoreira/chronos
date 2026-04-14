@@ -147,7 +147,7 @@ FASE 3 — TAURI COMMANDS: CRUD DE TAREFAS (API)
      - Retornar Task criada
      - Refs: FR-001, BR-004
 
-3.2  [not started] Implementar command get_tasks com filtros
+3.2  [done] Implementar command get_tasks com filtros
      - Parâmetros opcionais: filter (today/overdue/all), category, priority
      - JOIN com task_occurrences para trazer occurrence atual
      - Calcular status derivado (pending/completed/overdue) em runtime

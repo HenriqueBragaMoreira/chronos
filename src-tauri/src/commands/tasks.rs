@@ -1,6 +1,7 @@
-use crate::models::{CreateTaskRequest, Task};
+use chrono::{NaiveDate, Utc};
+
+use crate::models::{CreateTaskRequest, Task, TaskWithOccurrence};
 use crate::AppState;
-use uuid::Uuid;
 
 #[tauri::command]
 pub async fn create_task(
@@ -42,4 +43,121 @@ pub async fn create_task(
     .map_err(|e| format!("Failed to create initial occurrence: {}", e))?;
 
     Ok(task)
+}
+
+#[tauri::command]
+pub async fn get_tasks(
+    state: tauri::State<'_, AppState>,
+    filter: Option<String>,
+    category: Option<String>,
+    priority: Option<String>,
+    sort_by: Option<String>,
+) -> Result<Vec<TaskWithOccurrence>, String> {
+    let today = Utc::now().date_naive();
+
+    let rows = sqlx::query_as::<_, (
+        uuid::Uuid, String, Option<String>, Option<String>, String,
+        NaiveDate, Option<chrono::NaiveTime>, String, Option<i32>, bool,
+        chrono::DateTime<chrono::Utc>, chrono::DateTime<chrono::Utc>,
+        uuid::Uuid, NaiveDate, bool, Option<chrono::DateTime<chrono::Utc>>,
+    )>(
+        r#"
+        SELECT t.id, t.name, t.description, t.category, t.priority,
+               t.due_date, t.due_time, t.recurrence_type, t.recurrence_value,
+               t.is_deleted, t.created_at, t.updated_at,
+               o.id as occurrence_id, o.due_date as occurrence_due_date,
+               o.completed, o.completed_at
+        FROM tasks t
+        INNER JOIN task_occurrences o ON o.task_id = t.id
+        WHERE t.is_deleted = false
+          AND o.id = (
+            SELECT o2.id FROM task_occurrences o2
+            WHERE o2.task_id = t.id AND o2.completed = false
+            ORDER BY o2.due_date DESC
+            LIMIT 1
+          )
+        ORDER BY o.due_date ASC
+        "#,
+    )
+    .fetch_all(&state.db)
+    .await
+    .map_err(|e| format!("Failed to fetch tasks: {}", e))?;
+
+    let mut tasks: Vec<TaskWithOccurrence> = rows
+        .into_iter()
+        .map(|row| {
+            let status = if row.14 {
+                "completed".to_string()
+            } else if row.13 < today {
+                "overdue".to_string()
+            } else {
+                "pending".to_string()
+            };
+
+            let overdue_days = if !row.14 && row.13 < today {
+                Some((today - row.13).num_days())
+            } else {
+                None
+            };
+
+            TaskWithOccurrence {
+                task: Task {
+                    id: row.0,
+                    name: row.1,
+                    description: row.2,
+                    category: row.3,
+                    priority: row.4,
+                    due_date: row.5,
+                    due_time: row.6,
+                    recurrence_type: row.7,
+                    recurrence_value: row.8,
+                    is_deleted: row.9,
+                    created_at: row.10,
+                    updated_at: row.11,
+                },
+                occurrence_id: row.12,
+                occurrence_due_date: row.13,
+                completed: row.14,
+                completed_at: row.15,
+                status,
+                overdue_days,
+            }
+        })
+        .collect();
+
+    // Apply filters
+    if let Some(ref f) = filter {
+        match f.as_str() {
+            "today" => tasks.retain(|t| t.occurrence_due_date == today || t.status == "overdue"),
+            "overdue" => tasks.retain(|t| t.status == "overdue"),
+            _ => {}
+        }
+    }
+
+    if let Some(ref cat) = category {
+        tasks.retain(|t| t.task.category.as_deref() == Some(cat.as_str()));
+    }
+
+    if let Some(ref pri) = priority {
+        tasks.retain(|t| t.task.priority == *pri);
+    }
+
+    // Apply sorting
+    if let Some(ref sort) = sort_by {
+        match sort.as_str() {
+            "priority" => tasks.sort_by(|a, b| {
+                let priority_order = |p: &str| match p {
+                    "high" => 0,
+                    "medium" => 1,
+                    "low" => 2,
+                    _ => 3,
+                };
+                priority_order(&a.task.priority).cmp(&priority_order(&b.task.priority))
+            }),
+            "name" => tasks.sort_by(|a, b| a.task.name.cmp(&b.task.name)),
+            _ => {} // default: already sorted by due_date from SQL
+        }
+    }
+
+    Ok(tasks)
 }
