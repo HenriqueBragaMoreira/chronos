@@ -193,7 +193,7 @@ FASE 3 — TAURI COMMANDS: CRUD DE TAREFAS (API)
 FASE 4 — COMPONENTES UI: FORMULÁRIO DE TAREFAS (DESKTOP-UI)
 ================================================================================
 
-4.1  [not started] Instalar componentes shadcn necessários
+4.1  [done] Instalar componentes shadcn necessários
      - sheet, dialog, input, textarea, select, label, badge, separator,
        popover, calendar, command, sonner (toast)
      - Refs: FR-023
