@@ -166,20 +166,20 @@ FASE 3 — TAURI COMMANDS: CRUD DE TAREFAS (API)
      - Atualizar updated_at
      - Refs: FR-002
 
-3.5  [not started] Implementar command delete_task (soft delete)
+3.5  [done] Implementar command delete_task (soft delete)
      - Setar is_deleted = true (não apaga do banco)
      - Preservar task_occurrences existentes para histórico
      - Exigir confirmação via frontend (não na API)
      - Refs: FR-003, BR-014
 
-3.6  [not started] Implementar command complete_task
+3.6  [done] Implementar command complete_task
      - Receber task_id e occurrence_id
      - Setar completed = true e completed_at = now()
      - Se tarefa é recorrente: gerar próxima occurrence (delegar para Fase 5)
      - Retornar occurrence atualizada
      - Refs: FR-004, BR-001
 
-3.7  [not started] Implementar command get_categories
+3.7  [done] Implementar command get_categories
      - SELECT DISTINCT category FROM tasks WHERE is_deleted = false
      - Retornar lista de strings para autocomplete no frontend
      - Refs: BR-015

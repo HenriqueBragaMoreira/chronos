@@ -268,3 +268,67 @@ pub async fn update_task(
 
     Ok(task)
 }
+
+#[tauri::command]
+pub async fn delete_task(
+    state: tauri::State<'_, AppState>,
+    id: Uuid,
+) -> Result<(), String> {
+    let result = sqlx::query(
+        r#"
+        UPDATE tasks SET is_deleted = true, updated_at = NOW()
+        WHERE id = $1 AND is_deleted = false
+        "#,
+    )
+    .bind(id)
+    .execute(&state.db)
+    .await
+    .map_err(|e| format!("Failed to delete task: {}", e))?;
+
+    if result.rows_affected() == 0 {
+        return Err("Task not found".to_string());
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn complete_task(
+    state: tauri::State<'_, AppState>,
+    occurrence_id: Uuid,
+) -> Result<(), String> {
+    let result = sqlx::query(
+        r#"
+        UPDATE task_occurrences SET completed = true, completed_at = NOW()
+        WHERE id = $1 AND completed = false
+        "#,
+    )
+    .bind(occurrence_id)
+    .execute(&state.db)
+    .await
+    .map_err(|e| format!("Failed to complete task: {}", e))?;
+
+    if result.rows_affected() == 0 {
+        return Err("Occurrence not found or already completed".to_string());
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn get_categories(
+    state: tauri::State<'_, AppState>,
+) -> Result<Vec<String>, String> {
+    let categories = sqlx::query_scalar::<_, String>(
+        r#"
+        SELECT DISTINCT category FROM tasks
+        WHERE is_deleted = false AND category IS NOT NULL
+        ORDER BY category
+        "#,
+    )
+    .fetch_all(&state.db)
+    .await
+    .map_err(|e| format!("Failed to fetch categories: {}", e))?;
+
+    Ok(categories)
+}
