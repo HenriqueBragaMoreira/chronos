@@ -298,7 +298,7 @@ FASE 6 — LÓGICA DE RECORRÊNCIA (API)
      - Ex: dia 31 em fevereiro → dia 28 (ou 29 em bissexto)
      - Refs: BR-007
 
-6.5  [not started] Integrar geração de occurrence no complete_task
+6.5  [done] Integrar geração de occurrence no complete_task
      - Após completar, chamar calculate_next_date
      - Inserir nova task_occurrence com a data calculada
      - Refs: FR-007, BR-001
@@ -666,7 +666,7 @@ Fase  2 — Models & Structs Rust (API)          :  7/7  tarefas concluídas
 Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
-Fase  6 — Lógica de Recorrência (API)          :  4/6  tarefas concluídas
+Fase  6 — Lógica de Recorrência (API)          :  5/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  0/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  0/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 44/103 tarefas concluídas
+TOTAL                                          : 45/103 tarefas concluídas

@@ -2,6 +2,7 @@ use chrono::{NaiveDate, Utc};
 use uuid::Uuid;
 
 use crate::models::{CreateTaskRequest, Task, TaskWithOccurrence, UpdateTaskRequest};
+use crate::recurrence::calculate_next_date;
 use crate::AppState;
 
 #[tauri::command]
@@ -297,19 +298,44 @@ pub async fn complete_task(
     state: tauri::State<'_, AppState>,
     occurrence_id: Uuid,
 ) -> Result<(), String> {
-    let result = sqlx::query(
+    let occurrence = sqlx::query_as::<_, (Uuid, NaiveDate)>(
         r#"
         UPDATE task_occurrences SET completed = true, completed_at = NOW()
         WHERE id = $1 AND completed = false
+        RETURNING task_id, due_date
         "#,
     )
     .bind(occurrence_id)
-    .execute(&state.db)
+    .fetch_optional(&state.db)
     .await
     .map_err(|e| format!("Failed to complete task: {}", e))?;
 
-    if result.rows_affected() == 0 {
-        return Err("Occurrence not found or already completed".to_string());
+    let (task_id, occurrence_due_date) = occurrence
+        .ok_or_else(|| "Occurrence not found or already completed".to_string())?;
+
+    let task = sqlx::query_as::<_, (String, Option<i32>)>(
+        r#"
+        SELECT recurrence_type, recurrence_value FROM tasks
+        WHERE id = $1 AND is_deleted = false
+        "#,
+    )
+    .bind(task_id)
+    .fetch_one(&state.db)
+    .await
+    .map_err(|e| format!("Failed to fetch task: {}", e))?;
+
+    if let Some(next_date) = task.1.and_then(|val| calculate_next_date(&task.0, val, occurrence_due_date)) {
+        sqlx::query(
+            r#"
+            INSERT INTO task_occurrences (task_id, due_date)
+            VALUES ($1, $2)
+            "#,
+        )
+        .bind(task_id)
+        .bind(next_date)
+        .execute(&state.db)
+        .await
+        .map_err(|e| format!("Failed to create next occurrence: {}", e))?;
     }
 
     Ok(())
