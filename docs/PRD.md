@@ -287,7 +287,7 @@ FASE 6 — LÓGICA DE RECORRÊNCIA (API)
      - Ex: current_due_date=terça, value=2 → próxima terça
      - Refs: BR-005
 
-6.3  [not started] Implementar cálculo para recorrência por intervalo
+6.3  [done] Implementar cálculo para recorrência por intervalo
      - Próxima data = current_due_date + N dias
      - N = recurrence_value
      - Refs: BR-006
@@ -313,7 +313,7 @@ FASE 6 — LÓGICA DE RECORRÊNCIA (API)
 FASE 7 — TESTES: CRUD & RECORRÊNCIA (API)
 ================================================================================
 
-7.1  [not started] Configurar ambiente de testes Rust com banco de teste
+7.1  [done] Configurar ambiente de testes Rust com banco de teste
      - Criar helper para setup de PgPool de teste (banco separado ou transações)
      - Garantir isolamento entre testes
      - Refs: NFR-005
@@ -667,7 +667,7 @@ Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
-Fase  7 — Testes: CRUD & Recorrência (API)     :  1/6  tarefas concluídas
+Fase  7 — Testes: CRUD & Recorrência (API)     :  2/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  2/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 49/103 tarefas concluídas
+TOTAL                                          : 50/103 tarefas concluídas

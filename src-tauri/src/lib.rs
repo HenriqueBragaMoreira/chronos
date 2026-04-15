@@ -3,6 +3,9 @@ mod db;
 mod models;
 mod recurrence;
 
+#[cfg(test)]
+mod tests;
+
 use sqlx::PgPool;
 use tauri::Manager;
 
