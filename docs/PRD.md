@@ -353,7 +353,7 @@ FASE 7 — TESTES: CRUD & RECORRÊNCIA (API)
 FASE 8 — CONFIGURAÇÕES (API + DESKTOP-UI)
 ================================================================================
 
-8.1  [not started] Implementar command get_settings
+8.1  [done] Implementar command get_settings
      - Buscar row singleton (id=1) da tabela settings
      - Retornar struct Settings
      - Refs: FR-025, FR-026, FR-027
@@ -668,7 +668,7 @@ Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  1/6  tarefas concluídas
-Fase  8 — Configurações (API + UI)             :  0/5  tarefas concluídas
+Fase  8 — Configurações (API + UI)             :  1/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 47/103 tarefas concluídas
+TOTAL                                          : 48/103 tarefas concluídas
