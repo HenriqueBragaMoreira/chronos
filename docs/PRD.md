@@ -241,32 +241,32 @@ FASE 5 — PÁGINA DE TAREFAS (DESKTOP-UI)
      - Clique no item abre Sheet de edição
      - Refs: FR-004, FR-005, FR-008, BR-002, BR-004
 
-5.2  [not started] Criar componente TaskList com listagem
+5.2  [done] Criar componente TaskList com listagem
      - Buscar tarefas via get_tasks no mount
      - Renderizar lista de TaskItem
      - Estado de loading (skeleton)
      - Estado vazio com mensagem e CTA para criar tarefa
      - Refs: FR-005
 
-5.3  [not started] Criar barra de filtros na TaskList
+5.3  [done] Criar barra de filtros na TaskList
      - Filtro por período: Hoje, Atrasadas, Todas
      - Filtro por categoria: dropdown com categorias existentes
      - Filtro por prioridade: Alta, Média, Baixa
      - Ordenação: Data (padrão), Prioridade, Nome
      - Refs: FR-005
 
-5.4  [not started] Criar botão "Nova Tarefa" que abre TaskForm
+5.4  [done] Criar botão "Nova Tarefa" que abre TaskForm
      - Botão flutuante ou fixo no topo da página
      - Abre Sheet em modo criação (sem task preenchida)
      - Refs: FR-001, FR-023
 
-5.5  [not started] Implementar confirmação de exclusão de tarefa
+5.5  [done] Implementar confirmação de exclusão de tarefa
      - Dialog de confirmação: "Tem certeza que deseja excluir esta tarefa?"
      - Para recorrentes: informar que ocorrências futuras serão canceladas
      - Chamar delete_task após confirmação
      - Refs: FR-003
 
-5.6  [not started] Implementar página tasks.tsx completa
+5.6  [done] Implementar página tasks.tsx completa
      - Compor TaskList + filtros + botão nova tarefa
      - Integrar TaskForm (Sheet)
      - Gerenciar estado de abertura do Sheet (criar/editar)
@@ -662,10 +662,10 @@ RESUMO
 ================================================================================
 
 Fase  1 — Setup & Infraestrutura              : 15/15 tarefas concluídas
-Fase  2 — Models & Structs Rust (API)          :  0/7  tarefas concluídas
-Fase  3 — Tauri Commands: CRUD (API)           :  0/8  tarefas concluídas
-Fase  4 — Componentes UI: Formulário (UI)      :  0/5  tarefas concluídas
-Fase  5 — Página de Tarefas (UI)               :  0/6  tarefas concluídas
+Fase  2 — Models & Structs Rust (API)          :  7/7  tarefas concluídas
+Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
+Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
+Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  0/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  0/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  0/5  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 15/103 tarefas concluídas
+TOTAL                                          : 41/103 tarefas concluídas

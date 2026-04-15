@@ -37,6 +37,7 @@ interface TaskFormProps {
   onOpenChange: (open: boolean) => void;
   task?: Task | null;
   onSuccess: () => void;
+  onDelete?: () => void;
 }
 
 const WEEKDAYS = [
@@ -49,7 +50,7 @@ const WEEKDAYS = [
   { value: "6", label: "Sábado" },
 ];
 
-export function TaskForm({ open, onOpenChange, task, onSuccess }: TaskFormProps) {
+export function TaskForm({ open, onOpenChange, task, onSuccess, onDelete }: TaskFormProps) {
   const isEditing = !!task;
 
   const [name, setName] = useState("");
@@ -265,6 +266,17 @@ export function TaskForm({ open, onOpenChange, task, onSuccess }: TaskFormProps)
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Salvando..." : isEditing ? "Salvar Alterações" : "Criar Tarefa"}
           </Button>
+
+          {isEditing && onDelete && (
+            <Button
+              type="button"
+              variant="destructive"
+              className="w-full"
+              onClick={onDelete}
+            >
+              Excluir Tarefa
+            </Button>
+          )}
         </form>
       </SheetContent>
     </Sheet>
