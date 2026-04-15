@@ -292,7 +292,7 @@ FASE 6 — LÓGICA DE RECORRÊNCIA (API)
      - N = recurrence_value
      - Refs: BR-006
 
-6.4  [not started] Implementar cálculo para recorrência mensal
+6.4  [done] Implementar cálculo para recorrência mensal
      - Próxima data = mesmo dia do próximo mês
      - Fallback: se dia não existe no mês, usar último dia
      - Ex: dia 31 em fevereiro → dia 28 (ou 29 em bissexto)
@@ -666,7 +666,7 @@ Fase  2 — Models & Structs Rust (API)          :  7/7  tarefas concluídas
 Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
-Fase  6 — Lógica de Recorrência (API)          :  2/6  tarefas concluídas
+Fase  6 — Lógica de Recorrência (API)          :  4/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  0/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  0/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 43/103 tarefas concluídas
+TOTAL                                          : 44/103 tarefas concluídas
