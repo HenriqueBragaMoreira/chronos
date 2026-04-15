@@ -55,3 +55,124 @@ fn last_day_of_month(year: i32, month: u32) -> u32 {
     .expect("Invalid date calculating last day")
     .day()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Weekly tests
+    #[test]
+    fn weekly_next_tuesday_from_tuesday() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 14).unwrap(); // Tuesday
+        let next = next_weekly(2, from);
+        assert_eq!(next, NaiveDate::from_ymd_opt(2026, 4, 21).unwrap());
+    }
+
+    #[test]
+    fn weekly_next_friday_from_monday() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 13).unwrap(); // Monday
+        let next = next_weekly(5, from);
+        assert_eq!(next, NaiveDate::from_ymd_opt(2026, 4, 17).unwrap());
+    }
+
+    #[test]
+    fn weekly_next_monday_from_friday() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 17).unwrap(); // Friday
+        let next = next_weekly(1, from);
+        assert_eq!(next, NaiveDate::from_ymd_opt(2026, 4, 20).unwrap());
+    }
+
+    #[test]
+    fn weekly_sunday_from_saturday() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 18).unwrap(); // Saturday
+        let next = next_weekly(0, from);
+        assert_eq!(next, NaiveDate::from_ymd_opt(2026, 4, 19).unwrap());
+    }
+
+    // Interval tests
+    #[test]
+    fn interval_7_days() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 10).unwrap();
+        assert_eq!(next_interval(7, from), NaiveDate::from_ymd_opt(2026, 4, 17).unwrap());
+    }
+
+    #[test]
+    fn interval_15_days() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 10).unwrap();
+        assert_eq!(next_interval(15, from), NaiveDate::from_ymd_opt(2026, 4, 25).unwrap());
+    }
+
+    #[test]
+    fn interval_1_day() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 30).unwrap();
+        assert_eq!(next_interval(1, from), NaiveDate::from_ymd_opt(2026, 5, 1).unwrap());
+    }
+
+    #[test]
+    fn interval_30_days_across_month() {
+        let from = NaiveDate::from_ymd_opt(2026, 3, 15).unwrap();
+        assert_eq!(next_interval(30, from), NaiveDate::from_ymd_opt(2026, 4, 14).unwrap());
+    }
+
+    // Monthly tests
+    #[test]
+    fn monthly_normal() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 15).unwrap();
+        assert_eq!(next_monthly(15, from), NaiveDate::from_ymd_opt(2026, 5, 15).unwrap());
+    }
+
+    #[test]
+    fn monthly_day_31_in_february() {
+        let from = NaiveDate::from_ymd_opt(2026, 1, 31).unwrap();
+        assert_eq!(next_monthly(31, from), NaiveDate::from_ymd_opt(2026, 2, 28).unwrap());
+    }
+
+    #[test]
+    fn monthly_day_31_in_february_leap_year() {
+        let from = NaiveDate::from_ymd_opt(2028, 1, 31).unwrap();
+        assert_eq!(next_monthly(31, from), NaiveDate::from_ymd_opt(2028, 2, 29).unwrap());
+    }
+
+    #[test]
+    fn monthly_day_31_in_april() {
+        let from = NaiveDate::from_ymd_opt(2026, 3, 31).unwrap();
+        assert_eq!(next_monthly(31, from), NaiveDate::from_ymd_opt(2026, 4, 30).unwrap());
+    }
+
+    #[test]
+    fn monthly_december_to_january() {
+        let from = NaiveDate::from_ymd_opt(2026, 12, 15).unwrap();
+        assert_eq!(next_monthly(15, from), NaiveDate::from_ymd_opt(2027, 1, 15).unwrap());
+    }
+
+    // calculate_next_date dispatch tests
+    #[test]
+    fn dispatch_none_returns_none() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 15).unwrap();
+        assert!(calculate_next_date("none", 0, from).is_none());
+    }
+
+    #[test]
+    fn dispatch_invalid_returns_none() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 15).unwrap();
+        assert!(calculate_next_date("invalid", 5, from).is_none());
+    }
+
+    #[test]
+    fn dispatch_weekly() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 14).unwrap();
+        assert_eq!(calculate_next_date("weekly", 2, from), Some(NaiveDate::from_ymd_opt(2026, 4, 21).unwrap()));
+    }
+
+    #[test]
+    fn dispatch_interval() {
+        let from = NaiveDate::from_ymd_opt(2026, 4, 10).unwrap();
+        assert_eq!(calculate_next_date("interval", 30, from), Some(NaiveDate::from_ymd_opt(2026, 5, 10).unwrap()));
+    }
+
+    #[test]
+    fn dispatch_monthly() {
+        let from = NaiveDate::from_ymd_opt(2026, 1, 31).unwrap();
+        assert_eq!(calculate_next_date("monthly", 31, from), Some(NaiveDate::from_ymd_opt(2026, 2, 28).unwrap()));
+    }
+}

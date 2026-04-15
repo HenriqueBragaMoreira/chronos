@@ -318,7 +318,7 @@ FASE 7 — TESTES: CRUD & RECORRÊNCIA (API)
      - Garantir isolamento entre testes
      - Refs: NFR-005
 
-7.2  [not started] Escrever testes unitários para calculate_next_date
+7.2  [done] Escrever testes unitários para calculate_next_date
      - Testar weekly: todas as variações de dia da semana
      - Testar interval: intervalos de 1, 7, 15, 30 dias
      - Testar monthly: meses com 28, 29, 30, 31 dias
@@ -667,7 +667,7 @@ Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
-Fase  7 — Testes: CRUD & Recorrência (API)     :  0/6  tarefas concluídas
+Fase  7 — Testes: CRUD & Recorrência (API)     :  1/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  0/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 46/103 tarefas concluídas
+TOTAL                                          : 47/103 tarefas concluídas
