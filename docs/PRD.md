@@ -281,7 +281,7 @@ FASE 6 — LÓGICA DE RECORRÊNCIA (API)
      - Output: NaiveDate da próxima ocorrência
      - Refs: BR-001, BR-005, BR-006, BR-007
 
-6.2  [not started] Implementar cálculo para recorrência semanal
+6.2  [done] Implementar cálculo para recorrência semanal
      - Próxima data = próximo dia da semana configurado após current_due_date
      - recurrence_value = 0 (domingo) a 6 (sábado)
      - Ex: current_due_date=terça, value=2 → próxima terça
@@ -666,7 +666,7 @@ Fase  2 — Models & Structs Rust (API)          :  7/7  tarefas concluídas
 Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
-Fase  6 — Lógica de Recorrência (API)          :  1/6  tarefas concluídas
+Fase  6 — Lógica de Recorrência (API)          :  2/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  0/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  0/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 42/103 tarefas concluídas
+TOTAL                                          : 43/103 tarefas concluídas

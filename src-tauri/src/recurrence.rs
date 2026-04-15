@@ -7,6 +7,7 @@ pub fn calculate_next_date(
 ) -> Option<NaiveDate> {
     match recurrence_type {
         "weekly" => Some(next_weekly(recurrence_value, current_due_date)),
+        "interval" => Some(next_interval(recurrence_value, current_due_date)),
         _ => None,
     }
 }
@@ -18,4 +19,10 @@ fn next_weekly(weekday: i32, from: NaiveDate) -> NaiveDate {
     let days_ahead = if days_ahead == 0 { 7 } else { days_ahead };
     from.checked_add_days(Days::new(days_ahead as u64))
         .expect("Date overflow in weekly recurrence")
+}
+
+/// Next occurrence = current + N days.
+fn next_interval(days: i32, from: NaiveDate) -> NaiveDate {
+    from.checked_add_days(Days::new(days as u64))
+        .expect("Date overflow in interval recurrence")
 }
