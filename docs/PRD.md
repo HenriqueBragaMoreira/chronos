@@ -233,7 +233,7 @@ FASE 4 — COMPONENTES UI: FORMULÁRIO DE TAREFAS (DESKTOP-UI)
 FASE 5 — PÁGINA DE TAREFAS (DESKTOP-UI)
 ================================================================================
 
-5.1  [not started] Criar componente TaskItem para item individual
+5.1  [done] Criar componente TaskItem para item individual
      - Exibir: checkbox, nome, categoria (badge), prioridade (badge colorido),
        data de vencimento formatada DD/MM/YYYY
      - Se atrasada: badge "Atrasada há X dias — desde DD/MM"
