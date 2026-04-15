@@ -1,3 +1,6 @@
+pub mod tasks;
+
+use serial_test::serial;
 use sqlx::{PgPool, postgres::PgPoolOptions};
 
 /// Creates a PgPool connected to the test database and runs pending migrations.
@@ -59,6 +62,7 @@ pub async fn clean_db(pool: &PgPool) {
 // Smoke tests — verify the test infrastructure itself
 // ---------------------------------------------------------------------------
 
+#[serial]
 #[tokio::test]
 async fn db_connection_works() {
     let pool = setup_test_pool().await;
@@ -69,6 +73,7 @@ async fn db_connection_works() {
     assert_eq!(row.0, 1);
 }
 
+#[serial]
 #[tokio::test]
 async fn clean_db_clears_tasks_and_occurrences() {
     let pool = setup_test_pool().await;
@@ -87,6 +92,7 @@ async fn clean_db_clears_tasks_and_occurrences() {
     assert_eq!(occs.0, 0);
 }
 
+#[serial]
 #[tokio::test]
 async fn settings_singleton_exists_after_clean() {
     let pool = setup_test_pool().await;

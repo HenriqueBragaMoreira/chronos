@@ -1,17 +1,20 @@
 use chrono::{NaiveDate, Utc};
+use sqlx::PgPool;
 use uuid::Uuid;
 
 use crate::models::{CreateTaskRequest, Task, TaskWithOccurrence, UpdateTaskRequest};
 use crate::recurrence::calculate_next_date;
 use crate::AppState;
 
-#[tauri::command]
-pub async fn create_task(
-    state: tauri::State<'_, AppState>,
-    request: CreateTaskRequest,
-) -> Result<Task, String> {
+pub async fn create_task_inner(pool: &PgPool, request: CreateTaskRequest) -> Result<Task, String> {
+    if request.name.trim().is_empty() {
+        return Err("Task name cannot be empty".to_string());
+    }
+
     let priority = request.priority.unwrap_or_else(|| "medium".to_string());
     let recurrence_type = request.recurrence_type.unwrap_or_else(|| "none".to_string());
+
+    let mut tx = pool.begin().await.map_err(|e| format!("Failed to begin transaction: {}", e))?;
 
     let task = sqlx::query_as::<_, Task>(
         r#"
@@ -28,7 +31,7 @@ pub async fn create_task(
     .bind(request.due_time)
     .bind(&recurrence_type)
     .bind(request.recurrence_value)
-    .fetch_one(&state.db)
+    .fetch_one(&mut *tx)
     .await
     .map_err(|e| format!("Failed to create task: {}", e))?;
 
@@ -40,11 +43,21 @@ pub async fn create_task(
     )
     .bind(task.id)
     .bind(task.due_date)
-    .execute(&state.db)
+    .execute(&mut *tx)
     .await
     .map_err(|e| format!("Failed to create initial occurrence: {}", e))?;
 
+    tx.commit().await.map_err(|e| format!("Failed to commit transaction: {}", e))?;
+
     Ok(task)
+}
+
+#[tauri::command]
+pub async fn create_task(
+    state: tauri::State<'_, AppState>,
+    request: CreateTaskRequest,
+) -> Result<Task, String> {
+    create_task_inner(&state.db, request).await
 }
 
 #[tauri::command]
