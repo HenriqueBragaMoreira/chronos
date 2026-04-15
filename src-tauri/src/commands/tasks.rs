@@ -358,3 +358,76 @@ pub async fn get_categories(
 
     Ok(categories)
 }
+
+#[tauri::command]
+pub async fn get_today_tasks(
+    state: tauri::State<'_, AppState>,
+) -> Result<Vec<TaskWithOccurrence>, String> {
+    let today = Utc::now().date_naive();
+
+    let rows = sqlx::query_as::<_, (
+        Uuid, String, Option<String>, Option<String>, String,
+        NaiveDate, Option<chrono::NaiveTime>, String, Option<i32>, bool,
+        chrono::DateTime<chrono::Utc>, chrono::DateTime<chrono::Utc>,
+        Uuid, NaiveDate, bool, Option<chrono::DateTime<chrono::Utc>>,
+    )>(
+        r#"
+        SELECT t.id, t.name, t.description, t.category, t.priority,
+               t.due_date, t.due_time, t.recurrence_type, t.recurrence_value,
+               t.is_deleted, t.created_at, t.updated_at,
+               o.id as occurrence_id, o.due_date as occurrence_due_date,
+               o.completed, o.completed_at
+        FROM tasks t
+        INNER JOIN task_occurrences o ON o.task_id = t.id
+        WHERE t.is_deleted = false
+          AND o.completed = false
+          AND o.due_date <= $1
+        ORDER BY o.due_date ASC
+        "#,
+    )
+    .bind(today)
+    .fetch_all(&state.db)
+    .await
+    .map_err(|e| format!("Failed to fetch today tasks: {}", e))?;
+
+    let tasks = rows
+        .into_iter()
+        .map(|row| {
+            let status = if row.13 < today {
+                "overdue".to_string()
+            } else {
+                "pending".to_string()
+            };
+            let overdue_days = if row.13 < today {
+                Some((today - row.13).num_days())
+            } else {
+                None
+            };
+
+            TaskWithOccurrence {
+                task: Task {
+                    id: row.0,
+                    name: row.1,
+                    description: row.2,
+                    category: row.3,
+                    priority: row.4,
+                    due_date: row.5,
+                    due_time: row.6,
+                    recurrence_type: row.7,
+                    recurrence_value: row.8,
+                    is_deleted: row.9,
+                    created_at: row.10,
+                    updated_at: row.11,
+                },
+                occurrence_id: row.12,
+                occurrence_due_date: row.13,
+                completed: row.14,
+                completed_at: row.15,
+                status,
+                overdue_days,
+            }
+        })
+        .collect();
+
+    Ok(tasks)
+}

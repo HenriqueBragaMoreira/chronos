@@ -303,7 +303,7 @@ FASE 6 — LÓGICA DE RECORRÊNCIA (API)
      - Inserir nova task_occurrence com a data calculada
      - Refs: FR-007, BR-001
 
-6.6  [not started] Implementar query get_today_tasks
+6.6  [done] Implementar query get_today_tasks
      - Retornar tarefas pendentes de hoje + todas as atrasadas (overdue)
      - Atrasadas: occurrence.due_date < today AND completed = false
      - Incluir campo overdue_days = today - due_date
@@ -666,7 +666,7 @@ Fase  2 — Models & Structs Rust (API)          :  7/7  tarefas concluídas
 Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
-Fase  6 — Lógica de Recorrência (API)          :  5/6  tarefas concluídas
+Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  0/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  0/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 45/103 tarefas concluídas
+TOTAL                                          : 46/103 tarefas concluídas

@@ -33,6 +33,7 @@ pub fn run() {
             commands::tasks::delete_task,
             commands::tasks::complete_task,
             commands::tasks::get_categories,
+            commands::tasks::get_today_tasks,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
