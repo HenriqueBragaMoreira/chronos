@@ -1,6 +1,7 @@
 mod commands;
 mod db;
 mod models;
+mod recurrence;
 
 use sqlx::PgPool;
 use tauri::Manager;

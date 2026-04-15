@@ -276,7 +276,7 @@ FASE 5 — PÁGINA DE TAREFAS (DESKTOP-UI)
 FASE 6 — LÓGICA DE RECORRÊNCIA (API)
 ================================================================================
 
-6.1  [not started] Criar módulo recurrence.rs com função calculate_next_date
+6.1  [done] Criar módulo recurrence.rs com função calculate_next_date
      - Input: recurrence_type, recurrence_value, current_due_date
      - Output: NaiveDate da próxima ocorrência
      - Refs: BR-001, BR-005, BR-006, BR-007
@@ -666,7 +666,7 @@ Fase  2 — Models & Structs Rust (API)          :  7/7  tarefas concluídas
 Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
-Fase  6 — Lógica de Recorrência (API)          :  0/6  tarefas concluídas
+Fase  6 — Lógica de Recorrência (API)          :  1/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  0/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  0/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 41/103 tarefas concluídas
+TOTAL                                          : 42/103 tarefas concluídas
