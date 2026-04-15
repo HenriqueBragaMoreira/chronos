@@ -198,7 +198,7 @@ FASE 4 — COMPONENTES UI: FORMULÁRIO DE TAREFAS (DESKTOP-UI)
        popover, calendar, command, sonner (toast)
      - Refs: FR-023
 
-4.2  [not started] Criar componente TaskForm (Sheet lateral)
+4.2  [done] Criar componente TaskForm (Sheet lateral)
      - Campos: nome (input), descrição (textarea), categoria (combobox com
        autocomplete de categorias existentes), prioridade (select: alta/média/baixa),
        data de vencimento (date picker), horário (time input, opcional),
@@ -207,7 +207,7 @@ FASE 4 — COMPONENTES UI: FORMULÁRIO DE TAREFAS (DESKTOP-UI)
      - Reutilizado para criação e edição (recebe task opcional como prop)
      - Refs: FR-001, FR-002, FR-006, FR-023
 
-4.3  [not started] Implementar validação client-side no TaskForm
+4.3  [done] Implementar validação client-side no TaskForm
      - Nome obrigatório (não vazio)
      - Data de vencimento obrigatória
      - Valor de recorrência obrigatório quando tipo != nenhuma
@@ -216,14 +216,14 @@ FASE 4 — COMPONENTES UI: FORMULÁRIO DE TAREFAS (DESKTOP-UI)
      - Valor de recorrência mensal: input numérico (1-31)
      - Refs: FR-001, FR-006
 
-4.4  [not started] Conectar TaskForm ao backend via invoke()
+4.4  [done] Conectar TaskForm ao backend via invoke()
      - Chamar create_task ou update_task conforme modo (criar/editar)
      - Exibir toast de sucesso/erro com sonner
      - Fechar Sheet após sucesso
      - Atualizar lista de tarefas após mutação
      - Refs: FR-001, FR-002
 
-4.5  [not started] Criar componente CategoryCombobox
+4.5  [done] Criar componente CategoryCombobox
      - Buscar categorias existentes via get_categories
      - Permitir digitar nova categoria (texto livre)
      - Autocomplete com match parcial
