@@ -306,11 +306,7 @@ pub async fn delete_task(
     Ok(())
 }
 
-#[tauri::command]
-pub async fn complete_task(
-    state: tauri::State<'_, AppState>,
-    occurrence_id: Uuid,
-) -> Result<(), String> {
+pub async fn complete_task_inner(pool: &PgPool, occurrence_id: Uuid) -> Result<(), String> {
     let occurrence = sqlx::query_as::<_, (Uuid, NaiveDate)>(
         r#"
         UPDATE task_occurrences SET completed = true, completed_at = NOW()
@@ -319,7 +315,7 @@ pub async fn complete_task(
         "#,
     )
     .bind(occurrence_id)
-    .fetch_optional(&state.db)
+    .fetch_optional(pool)
     .await
     .map_err(|e| format!("Failed to complete task: {}", e))?;
 
@@ -333,7 +329,7 @@ pub async fn complete_task(
         "#,
     )
     .bind(task_id)
-    .fetch_one(&state.db)
+    .fetch_one(pool)
     .await
     .map_err(|e| format!("Failed to fetch task: {}", e))?;
 
@@ -346,12 +342,20 @@ pub async fn complete_task(
         )
         .bind(task_id)
         .bind(next_date)
-        .execute(&state.db)
+        .execute(pool)
         .await
         .map_err(|e| format!("Failed to create next occurrence: {}", e))?;
     }
 
     Ok(())
+}
+
+#[tauri::command]
+pub async fn complete_task(
+    state: tauri::State<'_, AppState>,
+    occurrence_id: Uuid,
+) -> Result<(), String> {
+    complete_task_inner(&state.db, occurrence_id).await
 }
 
 #[tauri::command]

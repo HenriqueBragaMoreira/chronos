@@ -331,7 +331,7 @@ FASE 7 — TESTES: CRUD & RECORRÊNCIA (API)
      - Validar campos obrigatórios (rejeitar nome vazio, sem data)
      - Refs: FR-001
 
-7.4  [not started] Escrever testes de integração para complete_task
+7.4  [done] Escrever testes de integração para complete_task
      - Completar tarefa simples: verificar completed_at
      - Completar tarefa recorrente: verificar nova occurrence gerada
      - Verificar que próxima data é baseada na original (não na conclusão)
@@ -667,7 +667,7 @@ Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
-Fase  7 — Testes: CRUD & Recorrência (API)     :  3/6  tarefas concluídas
+Fase  7 — Testes: CRUD & Recorrência (API)     :  4/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  2/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 51/103 tarefas concluídas
+TOTAL                                          : 52/103 tarefas concluídas
