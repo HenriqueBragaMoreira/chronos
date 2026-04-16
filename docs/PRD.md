@@ -408,13 +408,13 @@ FASE 9 — TRAY ICON & NOTIFICAÇÕES (API)
      - Usar set_badge_count ou gerar ícone dinâmico com número
      - Refs: FR-011, BR-010
 
-9.4  [not started] Criar módulo scheduler.rs para notificações programadas
+9.4  [done] Criar módulo scheduler.rs para notificações programadas
      - Loop assíncrono (tokio::spawn) que verifica o horário a cada minuto
      - Quando horário atual = notification_time configurado: disparar notificação
      - Prevenir disparo duplicado no mesmo dia (flag de "já notificou hoje")
      - Refs: FR-010, BR-008
 
-9.5  [not started] Implementar disparo de notificação do sistema
+9.5  [done] Implementar disparo de notificação do sistema
      - Usar tauri-plugin-notification para enviar notificação nativa
      - Título: "Chronos — Tarefas do dia"
      - Corpo: listar nomes das tarefas pendentes e atrasadas
@@ -669,7 +669,7 @@ Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
-Fase  9 — Tray Icon & Notificações (API)       :  2/7  tarefas concluídas
+Fase  9 — Tray Icon & Notificações (API)       :  4/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 59/103 tarefas concluídas
+TOTAL                                          : 61/103 tarefas concluídas

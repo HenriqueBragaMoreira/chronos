@@ -1,7 +1,9 @@
 mod commands;
 mod db;
 mod models;
+mod notifications;
 mod recurrence;
+mod scheduler;
 mod tray;
 
 #[cfg(test)]
@@ -29,6 +31,9 @@ pub fn run() {
 
             tray::setup_tray(app)?;
             tray::setup_minimize_to_tray(app);
+
+            let pool_for_scheduler = app.state::<AppState>().db.clone();
+            scheduler::start_scheduler(pool_for_scheduler, app.handle().clone());
 
             Ok(())
         })
