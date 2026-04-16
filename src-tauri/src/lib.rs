@@ -28,6 +28,7 @@ pub fn run() {
             app.manage(AppState { db: pool });
 
             tray::setup_tray(app)?;
+            tray::setup_minimize_to_tray(app);
 
             Ok(())
         })

@@ -1,8 +1,21 @@
 use tauri::{
     menu::{Menu, MenuItem, PredefinedMenuItem},
     tray::TrayIconBuilder,
-    App, Emitter, Manager,
+    App, Emitter, Manager, WindowEvent,
 };
+
+/// Intercepts the window close button so the app hides to tray instead of quitting.
+pub fn setup_minimize_to_tray(app: &App) {
+    if let Some(window) = app.get_webview_window("main") {
+        let window_for_hide = window.clone();
+        window.on_window_event(move |event| {
+            if let WindowEvent::CloseRequested { api, .. } = event {
+                api.prevent_close();
+                let _ = window_for_hide.hide();
+            }
+        });
+    }
+}
 
 pub fn setup_tray(app: &App) -> tauri::Result<()> {
     let open_item = MenuItem::with_id(app, "open", "Abrir Chronos", true, None::<&str>)?;

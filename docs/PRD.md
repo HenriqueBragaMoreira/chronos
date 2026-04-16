@@ -396,7 +396,7 @@ FASE 9 — TRAY ICON & NOTIFICAÇÕES (API)
      - "Sair" encerra o app completamente
      - Refs: FR-013
 
-9.2  [not started] Configurar minimize-to-tray ao fechar janela
+9.2  [done] Configurar minimize-to-tray ao fechar janela
      - Interceptar evento de fechar janela (close_requested)
      - Em vez de encerrar, esconder a janela (window.hide())
      - Manter app rodando em background
@@ -669,7 +669,7 @@ Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
-Fase  9 — Tray Icon & Notificações (API)       :  1/7  tarefas concluídas
+Fase  9 — Tray Icon & Notificações (API)       :  2/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 58/103 tarefas concluídas
+TOTAL                                          : 59/103 tarefas concluídas
