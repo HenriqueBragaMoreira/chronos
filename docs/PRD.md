@@ -363,7 +363,7 @@ FASE 8 — CONFIGURAÇÕES (API + DESKTOP-UI)
      - Atualizar updated_at
      - Refs: FR-025, FR-026, FR-027
 
-8.3  [not started] Criar página settings.tsx com formulário
+8.3  [done] Criar página settings.tsx com formulário
      - Campo: horário de notificação (time picker, padrão 08:00)
      - Campo: som de notificação (toggle on/off)
      - Campo: tema (select: Claro, Escuro, Sistema)
@@ -668,7 +668,7 @@ Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
-Fase  8 — Configurações (API + UI)             :  2/5  tarefas concluídas
+Fase  8 — Configurações (API + UI)             :  3/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 54/103 tarefas concluídas
+TOTAL                                          : 55/103 tarefas concluídas
