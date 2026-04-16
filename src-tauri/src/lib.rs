@@ -2,6 +2,7 @@ mod commands;
 mod db;
 mod models;
 mod recurrence;
+mod tray;
 
 #[cfg(test)]
 mod tests;
@@ -25,6 +26,8 @@ pub fn run() {
             let pool = rt.block_on(db::create_pool()).expect("Failed to connect to database");
 
             app.manage(AppState { db: pool });
+
+            tray::setup_tray(app)?;
 
             Ok(())
         })

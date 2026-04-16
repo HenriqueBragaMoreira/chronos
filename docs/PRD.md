@@ -388,7 +388,7 @@ FASE 8 — CONFIGURAÇÕES (API + DESKTOP-UI)
 FASE 9 — TRAY ICON & NOTIFICAÇÕES (API)
 ================================================================================
 
-9.1  [not started] Criar módulo tray.rs com setup do tray icon
+9.1  [done] Criar módulo tray.rs com setup do tray icon
      - Ícone padrão do app na bandeja do sistema
      - Menu de contexto: "Abrir Chronos", "Tarefas de Hoje", separador, "Sair"
      - "Abrir" restaura a janela principal
@@ -669,7 +669,7 @@ Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
-Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
+Fase  9 — Tray Icon & Notificações (API)       :  1/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 57/103 tarefas concluídas
+TOTAL                                          : 58/103 tarefas concluídas
