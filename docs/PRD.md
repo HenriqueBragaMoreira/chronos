@@ -379,7 +379,7 @@ FASE 8 — CONFIGURAÇÕES (API + DESKTOP-UI)
      - Persistir escolha no banco
      - Refs: FR-022, FR-026
 
-8.5  [not started] Adicionar toggle de tema no header ou sidebar
+8.5  [done] Adicionar toggle de tema no header ou sidebar
      - Ícone sol/lua com transição
      - Acessível em qualquer tela
      - Refs: FR-022
@@ -668,7 +668,7 @@ Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
-Fase  8 — Configurações (API + UI)             :  4/5  tarefas concluídas
+Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 56/103 tarefas concluídas
+TOTAL                                          : 57/103 tarefas concluídas
