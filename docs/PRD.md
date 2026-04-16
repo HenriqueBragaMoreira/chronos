@@ -420,7 +420,7 @@ FASE 9 — TRAY ICON & NOTIFICAÇÕES (API)
      - Corpo: listar nomes das tarefas pendentes e atrasadas
      - Refs: FR-010, BR-008, BR-009
 
-9.6  [not started] Implementar som de notificação
+9.6  [done] Implementar som de notificação
      - Tocar som ao disparar notificação
      - Respeitar configuração notification_sound_enabled do settings
      - Refs: FR-012
@@ -669,7 +669,7 @@ Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
-Fase  9 — Tray Icon & Notificações (API)       :  4/7  tarefas concluídas
+Fase  9 — Tray Icon & Notificações (API)       :  5/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 61/103 tarefas concluídas
+TOTAL                                          : 62/103 tarefas concluídas

@@ -4,8 +4,21 @@ use tauri_plugin_notification::NotificationExt;
 
 /// Queries pending and overdue tasks for today, then sends a system notification
 /// summarising them.  Called by the scheduler once per day at the configured time.
+///
+/// Respects `notification_sound_enabled` from settings: when disabled the
+/// notification is sent silently by omitting the sound identifier.
 pub async fn fire_daily_notification(pool: &PgPool, app: &AppHandle) {
     let today = chrono::Utc::now().date_naive();
+
+    // Fetch sound preference alongside tasks in a single query
+    let sound_enabled: bool = sqlx::query_scalar(
+        "SELECT notification_sound_enabled FROM settings WHERE id = 1",
+    )
+    .fetch_optional(pool)
+    .await
+    .ok()
+    .flatten()
+    .unwrap_or(true);
 
     let names: Vec<String> = match sqlx::query_scalar::<_, String>(
         r#"
@@ -40,13 +53,17 @@ pub async fn fire_daily_notification(pool: &PgPool, app: &AppHandle) {
         format!("{} e mais {} tarefa(s)", names[0], names.len() - 1)
     };
 
-    if let Err(e) = app
+    let mut builder = app
         .notification()
         .builder()
         .title("Chronos — Tarefas do dia")
-        .body(&body)
-        .show()
-    {
+        .body(&body);
+
+    if sound_enabled {
+        builder = builder.sound("default");
+    }
+
+    if let Err(e) = builder.show() {
         eprintln!("[scheduler] failed to send notification: {e}");
     }
 }
