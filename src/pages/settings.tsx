@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useTheme, type Theme } from "@/contexts/theme-context";
 
 interface Settings {
   id: number;
@@ -32,6 +33,7 @@ interface UpdateSettingsRequest {
 export default function SettingsPage() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [loading, setLoading] = useState(true);
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     invoke<Settings>("get_settings")
@@ -130,7 +132,12 @@ export default function SettingsPage() {
           </div>
           <Select
             value={settings.theme}
-            onValueChange={(value) => value && updateSettings({ theme: value })}
+            onValueChange={(value) => {
+              if (value) {
+                setTheme(value as Theme);
+                setSettings((prev) => prev ? { ...prev, theme: value } : prev);
+              }
+            }}
           >
             <SelectTrigger id="theme-select" className="w-40">
               <SelectValue />
