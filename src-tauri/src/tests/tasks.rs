@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serial_test::serial;
 use uuid::Uuid;
 
-use crate::commands::tasks::{complete_task_inner, create_task_inner};
+use crate::commands::tasks::{complete_task_inner, create_task_inner, delete_task_inner};
 use crate::models::CreateTaskRequest;
 
 // ---------------------------------------------------------------------------
@@ -302,4 +302,92 @@ async fn next_occurrence_date_is_based_on_original_due_date_not_completion_date(
     // Next date must be 2026-05-01 + 7 = 2026-05-08, NOT today + 7
     let expected = NaiveDate::from_ymd_opt(2026, 5, 8).unwrap();
     assert_eq!(next.0, expected, "next occurrence must be based on original due_date");
+}
+
+// ---------------------------------------------------------------------------
+// delete_task integration tests (soft delete)
+// ---------------------------------------------------------------------------
+
+#[serial]
+#[tokio::test]
+async fn delete_task_sets_is_deleted_and_preserves_row() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let task = create_task_inner(
+        &pool,
+        CreateTaskRequest {
+            name: "Task to delete".to_string(),
+            description: None,
+            category: None,
+            priority: None,
+            due_date: NaiveDate::from_ymd_opt(2026, 5, 1).unwrap(),
+            due_time: None,
+            recurrence_type: None,
+            recurrence_value: None,
+        },
+    )
+    .await
+    .unwrap();
+
+    delete_task_inner(&pool, task.id).await.expect("should soft-delete task");
+
+    // Row must still exist
+    let row: (bool,) = sqlx::query_as("SELECT is_deleted FROM tasks WHERE id = $1")
+        .bind(task.id)
+        .fetch_one(&pool)
+        .await
+        .expect("task row must still exist after soft delete");
+
+    assert!(row.0, "is_deleted must be true after delete");
+}
+
+#[serial]
+#[tokio::test]
+async fn delete_task_preserves_existing_occurrences() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let task = create_task_inner(
+        &pool,
+        CreateTaskRequest {
+            name: "Task with occurrences".to_string(),
+            description: None,
+            category: None,
+            priority: None,
+            due_date: NaiveDate::from_ymd_opt(2026, 5, 1).unwrap(),
+            due_time: None,
+            recurrence_type: None,
+            recurrence_value: None,
+        },
+    )
+    .await
+    .unwrap();
+
+    delete_task_inner(&pool, task.id).await.unwrap();
+
+    let occ_count: (i64,) =
+        sqlx::query_as("SELECT COUNT(*) FROM task_occurrences WHERE task_id = $1")
+            .bind(task.id)
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+
+    assert_eq!(occ_count.0, 1, "occurrences must be preserved after soft delete");
+}
+
+#[serial]
+#[tokio::test]
+async fn delete_task_returns_error_for_nonexistent_id() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let fake_id = Uuid::new_v4();
+    let result = delete_task_inner(&pool, fake_id).await;
+
+    assert!(result.is_err(), "deleting nonexistent task should return error");
+    assert!(
+        result.unwrap_err().contains("not found"),
+        "error should say 'not found'"
+    );
 }

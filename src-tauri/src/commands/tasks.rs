@@ -283,11 +283,7 @@ pub async fn update_task(
     Ok(task)
 }
 
-#[tauri::command]
-pub async fn delete_task(
-    state: tauri::State<'_, AppState>,
-    id: Uuid,
-) -> Result<(), String> {
+pub async fn delete_task_inner(pool: &PgPool, id: Uuid) -> Result<(), String> {
     let result = sqlx::query(
         r#"
         UPDATE tasks SET is_deleted = true, updated_at = NOW()
@@ -295,7 +291,7 @@ pub async fn delete_task(
         "#,
     )
     .bind(id)
-    .execute(&state.db)
+    .execute(pool)
     .await
     .map_err(|e| format!("Failed to delete task: {}", e))?;
 
@@ -304,6 +300,14 @@ pub async fn delete_task(
     }
 
     Ok(())
+}
+
+#[tauri::command]
+pub async fn delete_task(
+    state: tauri::State<'_, AppState>,
+    id: Uuid,
+) -> Result<(), String> {
+    delete_task_inner(&state.db, id).await
 }
 
 pub async fn complete_task_inner(pool: &PgPool, occurrence_id: Uuid) -> Result<(), String> {

@@ -337,7 +337,7 @@ FASE 7 — TESTES: CRUD & RECORRÊNCIA (API)
      - Verificar que próxima data é baseada na original (não na conclusão)
      - Refs: FR-004, FR-007, BR-001
 
-7.5  [not started] Escrever testes de integração para delete_task
+7.5  [done] Escrever testes de integração para delete_task
      - Verificar soft delete (is_deleted = true, registro permanece)
      - Verificar que occurrences históricas são preservadas
      - Refs: FR-003, BR-014
@@ -667,7 +667,7 @@ Fase  3 — Tauri Commands: CRUD (API)           :  8/8  tarefas concluídas
 Fase  4 — Componentes UI: Formulário (UI)      :  5/5  tarefas concluídas
 Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
-Fase  7 — Testes: CRUD & Recorrência (API)     :  4/6  tarefas concluídas
+Fase  7 — Testes: CRUD & Recorrência (API)     :  5/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  2/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  0/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 52/103 tarefas concluídas
+TOTAL                                          : 53/103 tarefas concluídas
