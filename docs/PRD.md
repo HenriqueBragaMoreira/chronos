@@ -425,7 +425,7 @@ FASE 9 — TRAY ICON & NOTIFICAÇÕES (API)
      - Respeitar configuração notification_sound_enabled do settings
      - Refs: FR-012
 
-9.7  [not started] Registrar tray e scheduler no setup do Tauri Builder
+9.7  [done] Registrar tray e scheduler no setup do Tauri Builder
      - Inicializar tray no app.setup()
      - Spawnar scheduler como task assíncrona
      - Refs: FR-010, FR-013
@@ -669,7 +669,7 @@ Fase  5 — Página de Tarefas (UI)               :  6/6  tarefas concluídas
 Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
-Fase  9 — Tray Icon & Notificações (API)       :  5/7  tarefas concluídas
+Fase  9 — Tray Icon & Notificações (API)       :  6/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
@@ -677,4 +677,4 @@ Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 62/103 tarefas concluídas
+TOTAL                                          : 63/103 tarefas concluídas
