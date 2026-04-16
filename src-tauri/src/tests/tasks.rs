@@ -2,7 +2,11 @@ use chrono::NaiveDate;
 use serial_test::serial;
 use uuid::Uuid;
 
-use crate::commands::tasks::{complete_task_inner, create_task_inner, delete_task_inner};
+use chrono::Utc;
+
+use crate::commands::tasks::{
+    complete_task_inner, create_task_inner, delete_task_inner, get_tasks_inner,
+};
 use crate::models::CreateTaskRequest;
 
 // ---------------------------------------------------------------------------
@@ -390,4 +394,199 @@ async fn delete_task_returns_error_for_nonexistent_id() {
         result.unwrap_err().contains("not found"),
         "error should say 'not found'"
     );
+}
+
+// ---------------------------------------------------------------------------
+// get_tasks integration tests (filters + sorting)
+// ---------------------------------------------------------------------------
+
+/// Helper: quickly create a task with minimal fields.
+async fn make_task(
+    pool: &sqlx::PgPool,
+    name: &str,
+    due_date: NaiveDate,
+    category: Option<&str>,
+    priority: &str,
+) -> crate::models::Task {
+    create_task_inner(
+        pool,
+        CreateTaskRequest {
+            name: name.to_string(),
+            description: None,
+            category: category.map(str::to_string),
+            priority: Some(priority.to_string()),
+            due_date,
+            due_time: None,
+            recurrence_type: None,
+            recurrence_value: None,
+        },
+    )
+    .await
+    .unwrap()
+}
+
+#[serial]
+#[tokio::test]
+async fn get_tasks_returns_all_pending_tasks() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let today = Utc::now().date_naive();
+    let future = today + chrono::Duration::days(5);
+
+    make_task(&pool, "Task A", future, None, "medium").await;
+    make_task(&pool, "Task B", future, None, "high").await;
+
+    let tasks = get_tasks_inner(&pool, None, None, None, None).await.unwrap();
+    assert_eq!(tasks.len(), 2);
+}
+
+#[serial]
+#[tokio::test]
+async fn get_tasks_filter_today_returns_todays_and_overdue() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let today = Utc::now().date_naive();
+    let overdue_date = NaiveDate::from_ymd_opt(2026, 1, 1).unwrap();
+    let future = today + chrono::Duration::days(10);
+
+    make_task(&pool, "Today task", today, None, "medium").await;
+    make_task(&pool, "Overdue task", overdue_date, None, "medium").await;
+    make_task(&pool, "Future task", future, None, "medium").await;
+
+    let tasks = get_tasks_inner(&pool, Some("today".to_string()), None, None, None)
+        .await
+        .unwrap();
+
+    assert_eq!(tasks.len(), 2, "today filter should return today + overdue");
+    let names: Vec<&str> = tasks.iter().map(|t| t.task.name.as_str()).collect();
+    assert!(names.contains(&"Today task"));
+    assert!(names.contains(&"Overdue task"));
+}
+
+#[serial]
+#[tokio::test]
+async fn get_tasks_filter_overdue_returns_only_overdue() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let today = Utc::now().date_naive();
+    let overdue_date = NaiveDate::from_ymd_opt(2026, 1, 1).unwrap();
+
+    make_task(&pool, "Today task", today, None, "medium").await;
+    make_task(&pool, "Overdue task", overdue_date, None, "medium").await;
+
+    let tasks = get_tasks_inner(&pool, Some("overdue".to_string()), None, None, None)
+        .await
+        .unwrap();
+
+    assert_eq!(tasks.len(), 1);
+    assert_eq!(tasks[0].task.name, "Overdue task");
+    assert!(tasks[0].overdue_days.is_some());
+}
+
+#[serial]
+#[tokio::test]
+async fn get_tasks_filter_by_category() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let future = Utc::now().date_naive() + chrono::Duration::days(5);
+
+    make_task(&pool, "Casa task", future, Some("Casa"), "medium").await;
+    make_task(&pool, "Trabalho task", future, Some("Trabalho"), "medium").await;
+    make_task(&pool, "Another casa", future, Some("Casa"), "low").await;
+
+    let tasks = get_tasks_inner(&pool, None, Some("Casa".to_string()), None, None)
+        .await
+        .unwrap();
+
+    assert_eq!(tasks.len(), 2);
+    assert!(tasks.iter().all(|t| t.task.category.as_deref() == Some("Casa")));
+}
+
+#[serial]
+#[tokio::test]
+async fn get_tasks_filter_by_priority() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let future = Utc::now().date_naive() + chrono::Duration::days(5);
+
+    make_task(&pool, "High task", future, None, "high").await;
+    make_task(&pool, "Medium task", future, None, "medium").await;
+    make_task(&pool, "Low task", future, None, "low").await;
+
+    let tasks = get_tasks_inner(&pool, None, None, Some("high".to_string()), None)
+        .await
+        .unwrap();
+
+    assert_eq!(tasks.len(), 1);
+    assert_eq!(tasks[0].task.priority, "high");
+}
+
+#[serial]
+#[tokio::test]
+async fn get_tasks_sort_by_priority_high_first() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let future = Utc::now().date_naive() + chrono::Duration::days(5);
+
+    make_task(&pool, "Low task", future, None, "low").await;
+    make_task(&pool, "High task", future, None, "high").await;
+    make_task(&pool, "Medium task", future, None, "medium").await;
+
+    let tasks =
+        get_tasks_inner(&pool, None, None, None, Some("priority".to_string()))
+            .await
+            .unwrap();
+
+    assert_eq!(tasks.len(), 3);
+    assert_eq!(tasks[0].task.priority, "high");
+    assert_eq!(tasks[1].task.priority, "medium");
+    assert_eq!(tasks[2].task.priority, "low");
+}
+
+#[serial]
+#[tokio::test]
+async fn get_tasks_sort_by_name_alphabetical() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let future = Utc::now().date_naive() + chrono::Duration::days(5);
+
+    make_task(&pool, "Zebra", future, None, "medium").await;
+    make_task(&pool, "Apple", future, None, "medium").await;
+    make_task(&pool, "Mango", future, None, "medium").await;
+
+    let tasks =
+        get_tasks_inner(&pool, None, None, None, Some("name".to_string()))
+            .await
+            .unwrap();
+
+    assert_eq!(tasks.len(), 3);
+    assert_eq!(tasks[0].task.name, "Apple");
+    assert_eq!(tasks[1].task.name, "Mango");
+    assert_eq!(tasks[2].task.name, "Zebra");
+}
+
+#[serial]
+#[tokio::test]
+async fn get_tasks_excludes_deleted_tasks() {
+    let pool = super::setup_test_pool().await;
+    super::clean_db(&pool).await;
+
+    let future = Utc::now().date_naive() + chrono::Duration::days(5);
+
+    let visible = make_task(&pool, "Visible", future, None, "medium").await;
+    let deleted = make_task(&pool, "Deleted", future, None, "medium").await;
+
+    delete_task_inner(&pool, deleted.id).await.unwrap();
+
+    let tasks = get_tasks_inner(&pool, None, None, None, None).await.unwrap();
+
+    assert_eq!(tasks.len(), 1);
+    assert_eq!(tasks[0].task.id, visible.id);
 }

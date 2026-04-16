@@ -60,9 +60,8 @@ pub async fn create_task(
     create_task_inner(&state.db, request).await
 }
 
-#[tauri::command]
-pub async fn get_tasks(
-    state: tauri::State<'_, AppState>,
+pub async fn get_tasks_inner(
+    pool: &PgPool,
     filter: Option<String>,
     category: Option<String>,
     priority: Option<String>,
@@ -94,7 +93,7 @@ pub async fn get_tasks(
         ORDER BY o.due_date ASC
         "#,
     )
-    .fetch_all(&state.db)
+    .fetch_all(pool)
     .await
     .map_err(|e| format!("Failed to fetch tasks: {}", e))?;
 
@@ -175,6 +174,17 @@ pub async fn get_tasks(
     }
 
     Ok(tasks)
+}
+
+#[tauri::command]
+pub async fn get_tasks(
+    state: tauri::State<'_, AppState>,
+    filter: Option<String>,
+    category: Option<String>,
+    priority: Option<String>,
+    sort_by: Option<String>,
+) -> Result<Vec<TaskWithOccurrence>, String> {
+    get_tasks_inner(&state.db, filter, category, priority, sort_by).await
 }
 
 #[tauri::command]
