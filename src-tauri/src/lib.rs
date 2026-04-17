@@ -38,7 +38,7 @@ pub fn run() {
             // Populate tray badge immediately on startup
             let pool_for_badge = app.state::<AppState>().db.clone();
             let app_handle = app.handle().clone();
-            tokio::spawn(async move {
+            tauri::async_runtime::spawn(async move {
                 notifications::update_tray_badge(&pool_for_badge, &app_handle).await;
             });
 

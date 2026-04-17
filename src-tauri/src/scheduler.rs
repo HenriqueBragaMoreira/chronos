@@ -12,7 +12,7 @@ use tokio::time::{interval, Duration};
 /// Uses an atomic day-of-year counter to prevent duplicate notifications within the
 /// same calendar day.
 pub fn start_scheduler(pool: PgPool, app: AppHandle) {
-    tokio::spawn(async move {
+    tauri::async_runtime::spawn(async move {
         // Tracks the last day-of-year on which a notification was fired.
         // 0 = "not yet notified today".
         let last_notified_day: Arc<AtomicU32> = Arc::new(AtomicU32::new(0));
