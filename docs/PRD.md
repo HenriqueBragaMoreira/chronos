@@ -434,7 +434,7 @@ FASE 9 — TRAY ICON & NOTIFICAÇÕES (API)
 FASE 10 — CALENDÁRIO (DESKTOP-UI)
 ================================================================================
 
-10.1 [not started] Criar componente MonthlyCalendarView
+10.1 [done] Criar componente MonthlyCalendarView
      - Grade 7x5/6 com dias do mês
      - Cabeçalho com navegação (mês anterior/próximo)
      - Nomes dos dias em pt-BR (Dom, Seg, Ter, ...)
@@ -670,11 +670,11 @@ Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
-Fase 10 — Calendário (UI)                      :  0/7  tarefas concluídas
+Fase 10 — Calendário (UI)                      :  1/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 64/103 tarefas concluídas
+TOTAL                                          : 65/103 tarefas concluídas
