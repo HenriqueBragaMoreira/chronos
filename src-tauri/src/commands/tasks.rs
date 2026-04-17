@@ -391,6 +391,15 @@ pub async fn get_categories(
 }
 
 #[tauri::command]
+pub async fn refresh_tray_badge(
+    state: tauri::State<'_, AppState>,
+    app: tauri::AppHandle,
+) -> Result<(), String> {
+    crate::notifications::update_tray_badge(&state.db, &app).await;
+    Ok(())
+}
+
+#[tauri::command]
 pub async fn get_today_tasks(
     state: tauri::State<'_, AppState>,
 ) -> Result<Vec<TaskWithOccurrence>, String> {

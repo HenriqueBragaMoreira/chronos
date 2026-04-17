@@ -23,10 +23,13 @@ pub fn start_scheduler(pool: PgPool, app: AppHandle) {
         loop {
             ticker.tick().await;
 
+            // Always refresh the tray badge regardless of notification state
+            super::notifications::update_tray_badge(&pool, &app).await;
+
             let now = Local::now();
             let current_day = now.ordinal(); // 1-366
 
-            // Skip if already notified today
+            // Skip notification check if already fired today
             if last_notified_day.load(Ordering::Relaxed) == current_day {
                 continue;
             }

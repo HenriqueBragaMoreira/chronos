@@ -44,6 +44,7 @@ export function TaskItem({ task, onComplete, onClick }: TaskItemProps) {
     e.stopPropagation();
     try {
       await invoke("complete_task", { occurrenceId: task.occurrence_id });
+      invoke("refresh_tray_badge").catch(() => {});
       toast.success(`"${task.name}" concluída!`);
       onComplete();
     } catch (err) {

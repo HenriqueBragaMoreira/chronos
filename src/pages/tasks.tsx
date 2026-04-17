@@ -59,6 +59,7 @@ export default function TasksPage() {
     if (!taskToDelete) return;
     try {
       await invoke("delete_task", { id: taskToDelete.id });
+      invoke("refresh_tray_badge").catch(() => {});
       toast.success(`"${taskToDelete.name}" excluída`);
       setDeleteDialogOpen(false);
       setTaskToDelete(null);
@@ -84,7 +85,10 @@ export default function TasksPage() {
         open={formOpen}
         onOpenChange={setFormOpen}
         task={editingTask}
-        onSuccess={() => setRefreshKey((k) => k + 1)}
+        onSuccess={() => {
+          invoke("refresh_tray_badge").catch(() => {});
+          setRefreshKey((k) => k + 1);
+        }}
         onDelete={editingTask ? handleRequestDelete : undefined}
       />
 

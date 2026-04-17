@@ -26,7 +26,7 @@ pub fn setup_tray(app: &App) -> tauri::Result<()> {
 
     let menu = Menu::with_items(app, &[&open_item, &today_item, &separator, &quit_item])?;
 
-    let mut builder = TrayIconBuilder::new().menu(&menu);
+    let mut builder = TrayIconBuilder::with_id("main-tray").menu(&menu);
 
     if let Some(icon) = app.default_window_icon() {
         builder = builder.icon(icon.clone());

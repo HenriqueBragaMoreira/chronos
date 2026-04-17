@@ -67,3 +67,37 @@ pub async fn fire_daily_notification(pool: &PgPool, app: &AppHandle) {
         eprintln!("[scheduler] failed to send notification: {e}");
     }
 }
+
+/// Counts pending + overdue tasks (due today or earlier, not yet completed)
+/// and updates the tray icon title and tooltip accordingly.
+/// Called every scheduler tick and after any task mutation via `refresh_tray_badge`.
+pub async fn update_tray_badge(pool: &PgPool, app: &AppHandle) {
+    let today = chrono::Utc::now().date_naive();
+
+    let count: i64 = sqlx::query_scalar(
+        r#"
+        SELECT COUNT(*)
+        FROM tasks t
+        INNER JOIN task_occurrences o ON o.task_id = t.id
+        WHERE t.is_deleted = false
+          AND o.completed = false
+          AND o.due_date <= $1
+        "#,
+    )
+    .bind(today)
+    .fetch_one(pool)
+    .await
+    .unwrap_or(0);
+
+    if let Some(tray) = app.tray_by_id("main-tray") {
+        let title = if count > 0 { Some(count.to_string()) } else { None };
+        let _ = tray.set_title(title.as_deref());
+
+        let tooltip = if count > 0 {
+            format!("Chronos — {} tarefa(s) pendente(s)", count)
+        } else {
+            "Chronos".to_string()
+        };
+        let _ = tray.set_tooltip(Some(&tooltip));
+    }
+}

@@ -35,6 +35,13 @@ pub fn run() {
             let pool_for_scheduler = app.state::<AppState>().db.clone();
             scheduler::start_scheduler(pool_for_scheduler, app.handle().clone());
 
+            // Populate tray badge immediately on startup
+            let pool_for_badge = app.state::<AppState>().db.clone();
+            let app_handle = app.handle().clone();
+            tokio::spawn(async move {
+                notifications::update_tray_badge(&pool_for_badge, &app_handle).await;
+            });
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -46,6 +53,7 @@ pub fn run() {
             commands::tasks::complete_task,
             commands::tasks::get_categories,
             commands::tasks::get_today_tasks,
+            commands::tasks::refresh_tray_badge,
             commands::settings::get_settings,
             commands::settings::update_settings,
         ])
