@@ -440,7 +440,7 @@ FASE 10 — CALENDÁRIO (DESKTOP-UI)
      - Nomes dos dias em pt-BR (Dom, Seg, Ter, ...)
      - Refs: FR-019, FR-024
 
-10.2 [not started] Renderizar tarefas nos dias do calendário mensal
+10.2 [done] Renderizar tarefas nos dias do calendário mensal
      - Dots ou badges coloridos por status (pendente, concluída, atrasada)
      - Cores: verde (concluída), azul (pendente), vermelho (atrasada)
      - Clicar no dia expande lista de tarefas daquele dia
@@ -670,11 +670,11 @@ Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
-Fase 10 — Calendário (UI)                      :  1/7  tarefas concluídas
+Fase 10 — Calendário (UI)                      :  2/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 65/103 tarefas concluídas
+TOTAL                                          : 66/103 tarefas concluídas
