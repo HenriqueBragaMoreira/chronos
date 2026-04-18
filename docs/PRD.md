@@ -463,7 +463,7 @@ FASE 10 — CALENDÁRIO (DESKTOP-UI)
      - Persistir preferência na navegação (não no banco, só em state)
      - Refs: FR-021
 
-10.6 [not started] Implementar command get_tasks_by_date_range
+10.6 [done] Implementar command get_tasks_by_date_range
      - Parâmetros: start_date, end_date
      - Retornar todas as occurrences no range com dados da task
      - Otimizado para carregar um mês ou uma semana de dados
@@ -670,11 +670,11 @@ Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
-Fase 10 — Calendário (UI)                      :  5/7  tarefas concluídas
+Fase 10 — Calendário (UI)                      :  6/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 69/103 tarefas concluídas
+TOTAL                                          : 70/103 tarefas concluídas

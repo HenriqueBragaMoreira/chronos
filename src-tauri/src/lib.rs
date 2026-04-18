@@ -53,6 +53,7 @@ pub fn run() {
             commands::tasks::complete_task,
             commands::tasks::get_categories,
             commands::tasks::get_today_tasks,
+            commands::tasks::get_tasks_by_date_range,
             commands::tasks::refresh_tray_badge,
             commands::settings::get_settings,
             commands::settings::update_settings,
