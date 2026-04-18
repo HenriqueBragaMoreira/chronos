@@ -479,7 +479,7 @@ FASE 10 — CALENDÁRIO (DESKTOP-UI)
 FASE 11 — DASHBOARD (API + DESKTOP-UI)
 ================================================================================
 
-11.1 [not started] Instalar biblioteca de gráficos (recharts)
+11.1 [done] Instalar biblioteca de gráficos (recharts)
      - Adicionar recharts como dependência
      - Refs: FR-016, FR-017
 
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  1/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 71/103 tarefas concluídas
+TOTAL                                          : 72/103 tarefas concluídas
