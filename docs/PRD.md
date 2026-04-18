@@ -446,7 +446,7 @@ FASE 10 — CALENDÁRIO (DESKTOP-UI)
      - Clicar no dia expande lista de tarefas daquele dia
      - Refs: FR-019, BR-004
 
-10.3 [not started] Criar componente WeeklyCalendarView
+10.3 [done] Criar componente WeeklyCalendarView
      - 7 colunas com mais espaço por dia
      - Exibir nome da tarefa + horário (se configurado) + descrição parcial
      - Navegação: semana anterior/próxima
@@ -670,11 +670,11 @@ Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
-Fase 10 — Calendário (UI)                      :  2/7  tarefas concluídas
+Fase 10 — Calendário (UI)                      :  3/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 66/103 tarefas concluídas
+TOTAL                                          : 67/103 tarefas concluídas
