@@ -483,7 +483,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Adicionar recharts como dependência
      - Refs: FR-016, FR-017
 
-11.2 [not started] Implementar command get_completion_rate
+11.2 [done] Implementar command get_completion_rate
      - Parâmetros: period (week/month/year)
      - Calcular: concluídas no prazo / total vencidas no período × 100
      - "No prazo" = completed_at <= due_date
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  1/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  2/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 72/103 tarefas concluídas
+TOTAL                                          : 73/103 tarefas concluídas
