@@ -469,7 +469,7 @@ FASE 10 — CALENDÁRIO (DESKTOP-UI)
      - Otimizado para carregar um mês ou uma semana de dados
      - Refs: FR-019, FR-020
 
-10.7 [not started] Implementar página calendar.tsx completa
+10.7 [done] Implementar página calendar.tsx completa
      - Compor MonthlyCalendarView + WeeklyCalendarView + toggle
      - Integrar TaskForm (Sheet) para edição ao clicar em tarefa
      - Buscar dados via get_tasks_by_date_range
@@ -670,11 +670,11 @@ Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
-Fase 10 — Calendário (UI)                      :  6/7  tarefas concluídas
+Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 70/103 tarefas concluídas
+TOTAL                                          : 71/103 tarefas concluídas

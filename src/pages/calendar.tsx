@@ -41,6 +41,24 @@ function toDateKey(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
+function getMonthRange(date: Date): { start: string; end: string } {
+  const y = date.getFullYear();
+  const m = date.getMonth();
+  const start = `${y}-${String(m + 1).padStart(2, "0")}-01`;
+  const lastDay = new Date(y, m + 1, 0).getDate();
+  const end = `${y}-${String(m + 1).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
+  return { start, end };
+}
+
+function getWeekRange(date: Date): { start: string; end: string } {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() - d.getDay()); // back to Sunday
+  const end = new Date(d);
+  end.setDate(d.getDate() + 6);
+  return { start: toDateKey(d), end: toDateKey(end) };
+}
+
 export default function CalendarPage() {
   const [view, setView] = useState<"monthly" | "weekly">("monthly");
   const [currentDate, setCurrentDate] = useState(() => {
@@ -52,14 +70,13 @@ export default function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<TaskData | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const fetchTasks = useCallback(async () => {
+  const fetchTasks = useCallback(async (start: string, end: string) => {
     try {
-      const result = await invoke<TaskData[]>("get_tasks", {
-        filter: null,
-        category: null,
-        priority: null,
-        sortBy: null,
+      const result = await invoke<TaskData[]>("get_tasks_by_date_range", {
+        startDate: start,
+        endDate: end,
       });
       setTasks(result);
     } catch (err) {
@@ -68,8 +85,10 @@ export default function CalendarPage() {
   }, []);
 
   useEffect(() => {
-    fetchTasks();
-  }, [fetchTasks]);
+    const range =
+      view === "monthly" ? getMonthRange(currentDate) : getWeekRange(weekDate);
+    fetchTasks(range.start, range.end);
+  }, [view, currentDate, weekDate, fetchTasks, refreshKey]);
 
   const tasksByDate = useMemo(() => {
     const map = new Map<string, TaskData[]>();
@@ -138,7 +157,7 @@ export default function CalendarPage() {
     }
   }
 
-  function handleTaskClick(wt: WeeklyTask) {
+  function handleTaskClick(wt: WeeklyTask | TaskData) {
     const full = taskByOccurrenceId.get(wt.occurrence_id);
     if (full) {
       setEditingTask(full);
@@ -148,7 +167,7 @@ export default function CalendarPage() {
 
   function handleFormSuccess() {
     invoke("refresh_tray_badge").catch(() => {});
-    fetchTasks();
+    setRefreshKey((k) => k + 1);
   }
 
   return (
@@ -160,7 +179,10 @@ export default function CalendarPage() {
             variant={view === "monthly" ? "default" : "ghost"}
             size="sm"
             className="rounded-r-none"
-            onClick={() => setView("monthly")}
+            onClick={() => {
+              setView("monthly");
+              setSelectedDate(null);
+            }}
           >
             Mensal
           </Button>
@@ -175,76 +197,74 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      {/* Monthly view */}
       {view === "monthly" && (
-      <section>
-        <MonthlyCalendarView
-          currentDate={currentDate}
-          onMonthChange={(date) => {
-            setCurrentDate(date);
-            setSelectedDate(null);
-          }}
-          onDayClick={handleDayClick}
-          renderDayContent={renderDayContent}
-        />
+        <section>
+          <MonthlyCalendarView
+            currentDate={currentDate}
+            onMonthChange={(date) => {
+              setCurrentDate(date);
+              setSelectedDate(null);
+            }}
+            onDayClick={handleDayClick}
+            renderDayContent={renderDayContent}
+          />
 
-        {selectedDate && (
-          <div className="mt-4 space-y-3 rounded-lg border p-4">
-            <h2 className="font-semibold">
-              {selectedDate.toLocaleDateString("pt-BR", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </h2>
+          {selectedDate && (
+            <div className="mt-4 space-y-3 rounded-lg border p-4">
+              <h2 className="font-semibold">
+                {selectedDate.toLocaleDateString("pt-BR", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </h2>
 
-            {selectedDateTasks.length === 0 ? (
-              <p className="text-sm text-muted-foreground">Nenhuma tarefa neste dia.</p>
-            ) : (
-              <ul className="space-y-2">
-                {selectedDateTasks.map((task) => (
-                  <li
-                    key={task.occurrence_id}
-                    onClick={() => handleTaskClick({ ...task })}
-                    className="flex cursor-pointer items-center gap-3 rounded-md border px-3 py-2 text-sm transition-colors hover:bg-muted/50"
-                  >
-                    <span
-                      className={`h-2 w-2 flex-shrink-0 rounded-full ${STATUS_DOT[task.status] ?? "bg-muted-foreground"}`}
-                    />
-                    <span className="flex-1 font-medium">{task.name}</span>
-                    {task.due_time && (
+              {selectedDateTasks.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Nenhuma tarefa neste dia.</p>
+              ) : (
+                <ul className="space-y-2">
+                  {selectedDateTasks.map((task) => (
+                    <li
+                      key={task.occurrence_id}
+                      onClick={() => handleTaskClick(task)}
+                      className="flex cursor-pointer items-center gap-3 rounded-md border px-3 py-2 text-sm transition-colors hover:bg-muted/50"
+                    >
+                      <span
+                        className={`h-2 w-2 flex-shrink-0 rounded-full ${STATUS_DOT[task.status] ?? "bg-muted-foreground"}`}
+                      />
+                      <span className="flex-1 font-medium">{task.name}</span>
+                      {task.due_time && (
+                        <span className="text-xs text-muted-foreground">
+                          {task.due_time.slice(0, 5)}
+                        </span>
+                      )}
+                      {task.category && (
+                        <Badge variant="secondary" className="text-xs">
+                          {task.category}
+                        </Badge>
+                      )}
                       <span className="text-xs text-muted-foreground">
-                        {task.due_time.slice(0, 5)}
+                        {STATUS_LABEL[task.status] ?? task.status}
                       </span>
-                    )}
-                    {task.category && (
-                      <Badge variant="secondary" className="text-xs">
-                        {task.category}
-                      </Badge>
-                    )}
-                    <span className="text-xs text-muted-foreground">
-                      {STATUS_LABEL[task.status] ?? task.status}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
-      </section>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </section>
       )}
 
-      {/* Weekly view */}
       {view === "weekly" && (
-      <section>
-        <WeeklyCalendarView
-          currentDate={weekDate}
-          onWeekChange={setWeekDate}
-          tasks={weeklyTasks}
-          onTaskClick={handleTaskClick}
-        />
-      </section>
+        <section>
+          <WeeklyCalendarView
+            currentDate={weekDate}
+            onWeekChange={setWeekDate}
+            tasks={weeklyTasks}
+            onTaskClick={handleTaskClick}
+          />
+        </section>
       )}
 
       <TaskForm
