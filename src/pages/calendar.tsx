@@ -5,7 +5,7 @@ import { MonthlyCalendarView } from "@/components/calendar/monthly-calendar-view
 import { WeeklyCalendarView, type WeeklyTask } from "@/components/calendar/weekly-calendar-view";
 import { TaskForm } from "@/components/tasks/task-form";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
 interface TaskData {
   id: string;
@@ -42,6 +42,7 @@ function toDateKey(date: Date): string {
 }
 
 export default function CalendarPage() {
+  const [view, setView] = useState<"monthly" | "weekly">("monthly");
   const [currentDate, setCurrentDate] = useState(() => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
@@ -151,10 +152,31 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-bold">Calendário</h1>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Calendário</h1>
+        <div className="flex rounded-md border">
+          <Button
+            variant={view === "monthly" ? "default" : "ghost"}
+            size="sm"
+            className="rounded-r-none"
+            onClick={() => setView("monthly")}
+          >
+            Mensal
+          </Button>
+          <Button
+            variant={view === "weekly" ? "default" : "ghost"}
+            size="sm"
+            className="rounded-l-none border-l"
+            onClick={() => setView("weekly")}
+          >
+            Semanal
+          </Button>
+        </div>
+      </div>
 
       {/* Monthly view */}
+      {view === "monthly" && (
       <section>
         <MonthlyCalendarView
           currentDate={currentDate}
@@ -211,10 +233,10 @@ export default function CalendarPage() {
           </div>
         )}
       </section>
-
-      <Separator />
+      )}
 
       {/* Weekly view */}
+      {view === "weekly" && (
       <section>
         <WeeklyCalendarView
           currentDate={weekDate}
@@ -223,6 +245,7 @@ export default function CalendarPage() {
           onTaskClick={handleTaskClick}
         />
       </section>
+      )}
 
       <TaskForm
         open={formOpen}

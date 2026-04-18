@@ -458,7 +458,7 @@ FASE 10 — CALENDÁRIO (DESKTOP-UI)
      - Clicar na tarefa abre Sheet de edição
      - Refs: FR-020, BR-004
 
-10.5 [not started] Criar toggle entre visualização mensal e semanal
+10.5 [done] Criar toggle entre visualização mensal e semanal
      - Botões ou tabs: "Mensal" / "Semanal"
      - Persistir preferência na navegação (não no banco, só em state)
      - Refs: FR-021
@@ -670,11 +670,11 @@ Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
-Fase 10 — Calendário (UI)                      :  4/7  tarefas concluídas
+Fase 10 — Calendário (UI)                      :  5/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 68/103 tarefas concluídas
+TOTAL                                          : 69/103 tarefas concluídas
