@@ -452,7 +452,7 @@ FASE 10 — CALENDÁRIO (DESKTOP-UI)
      - Navegação: semana anterior/próxima
      - Refs: FR-020
 
-10.4 [not started] Renderizar tarefas na visualização semanal
+10.4 [done] Renderizar tarefas na visualização semanal
      - Cards com mais detalhes que a visão mensal
      - Mesmas cores de status
      - Clicar na tarefa abre Sheet de edição
@@ -670,11 +670,11 @@ Fase  6 — Lógica de Recorrência (API)          :  6/6  tarefas concluídas
 Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
-Fase 10 — Calendário (UI)                      :  3/7  tarefas concluídas
+Fase 10 — Calendário (UI)                      :  4/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 :  0/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 67/103 tarefas concluídas
+TOTAL                                          : 68/103 tarefas concluídas

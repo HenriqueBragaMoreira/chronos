@@ -1,17 +1,25 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { Toaster } from "sonner";
 import { MonthlyCalendarView } from "@/components/calendar/monthly-calendar-view";
+import { WeeklyCalendarView, type WeeklyTask } from "@/components/calendar/weekly-calendar-view";
+import { TaskForm } from "@/components/tasks/task-form";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 interface TaskData {
   id: string;
   name: string;
+  description: string | null;
   category: string | null;
   priority: string;
+  due_date: string;
+  due_time: string | null;
+  recurrence_type: string;
+  recurrence_value: number | null;
   occurrence_id: string;
   occurrence_due_date: string;
   status: string;
-  due_time: string | null;
 }
 
 const STATUS_DOT: Record<string, string> = {
@@ -38,8 +46,11 @@ export default function CalendarPage() {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
   });
+  const [weekDate, setWeekDate] = useState(() => new Date());
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [formOpen, setFormOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState<TaskData | null>(null);
 
   const fetchTasks = useCallback(async () => {
     try {
@@ -59,7 +70,6 @@ export default function CalendarPage() {
     fetchTasks();
   }, [fetchTasks]);
 
-  // Group tasks by occurrence_due_date
   const tasksByDate = useMemo(() => {
     const map = new Map<string, TaskData[]>();
     for (const task of tasks) {
@@ -69,6 +79,27 @@ export default function CalendarPage() {
     }
     return map;
   }, [tasks]);
+
+  const taskByOccurrenceId = useMemo(
+    () => new Map(tasks.map((t) => [t.occurrence_id, t])),
+    [tasks],
+  );
+
+  const weeklyTasks = useMemo<WeeklyTask[]>(
+    () =>
+      tasks.map((t) => ({
+        id: t.id,
+        occurrence_id: t.occurrence_id,
+        name: t.name,
+        description: t.description,
+        category: t.category,
+        priority: t.priority,
+        occurrence_due_date: t.occurrence_due_date,
+        due_time: t.due_time,
+        status: t.status,
+      })),
+    [tasks],
+  );
 
   const selectedDateTasks = useMemo(
     () => (selectedDate ? (tasksByDate.get(toDateKey(selectedDate)) ?? []) : []),
@@ -83,17 +114,15 @@ export default function CalendarPage() {
     const overflow = dayTasks.length - visible.length;
 
     return (
-      <div className="flex items-center gap-0.5 flex-wrap">
+      <div className="flex flex-wrap items-center gap-0.5">
         {visible.map((t) => (
           <span
             key={t.occurrence_id}
-            className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${STATUS_DOT[t.status] ?? "bg-muted-foreground"}`}
+            className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${STATUS_DOT[t.status] ?? "bg-muted-foreground"}`}
           />
         ))}
         {overflow > 0 && (
-          <span className="text-[10px] leading-none text-muted-foreground">
-            +{overflow}
-          </span>
+          <span className="text-[10px] leading-none text-muted-foreground">+{overflow}</span>
         )}
       </div>
     );
@@ -101,7 +130,6 @@ export default function CalendarPage() {
 
   function handleDayClick(date: Date) {
     const key = toDateKey(date);
-    // Toggle: clicking the same day again deselects
     if (selectedDate && toDateKey(selectedDate) === key) {
       setSelectedDate(null);
     } else {
@@ -109,63 +137,101 @@ export default function CalendarPage() {
     }
   }
 
+  function handleTaskClick(wt: WeeklyTask) {
+    const full = taskByOccurrenceId.get(wt.occurrence_id);
+    if (full) {
+      setEditingTask(full);
+      setFormOpen(true);
+    }
+  }
+
+  function handleFormSuccess() {
+    invoke("refresh_tray_badge").catch(() => {});
+    fetchTasks();
+  }
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <h1 className="text-3xl font-bold">Calendário</h1>
 
-      <MonthlyCalendarView
-        currentDate={currentDate}
-        onMonthChange={(date) => {
-          setCurrentDate(date);
-          setSelectedDate(null);
-        }}
-        onDayClick={handleDayClick}
-        renderDayContent={renderDayContent}
+      {/* Monthly view */}
+      <section>
+        <MonthlyCalendarView
+          currentDate={currentDate}
+          onMonthChange={(date) => {
+            setCurrentDate(date);
+            setSelectedDate(null);
+          }}
+          onDayClick={handleDayClick}
+          renderDayContent={renderDayContent}
+        />
+
+        {selectedDate && (
+          <div className="mt-4 space-y-3 rounded-lg border p-4">
+            <h2 className="font-semibold">
+              {selectedDate.toLocaleDateString("pt-BR", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </h2>
+
+            {selectedDateTasks.length === 0 ? (
+              <p className="text-sm text-muted-foreground">Nenhuma tarefa neste dia.</p>
+            ) : (
+              <ul className="space-y-2">
+                {selectedDateTasks.map((task) => (
+                  <li
+                    key={task.occurrence_id}
+                    onClick={() => handleTaskClick({ ...task })}
+                    className="flex cursor-pointer items-center gap-3 rounded-md border px-3 py-2 text-sm transition-colors hover:bg-muted/50"
+                  >
+                    <span
+                      className={`h-2 w-2 flex-shrink-0 rounded-full ${STATUS_DOT[task.status] ?? "bg-muted-foreground"}`}
+                    />
+                    <span className="flex-1 font-medium">{task.name}</span>
+                    {task.due_time && (
+                      <span className="text-xs text-muted-foreground">
+                        {task.due_time.slice(0, 5)}
+                      </span>
+                    )}
+                    {task.category && (
+                      <Badge variant="secondary" className="text-xs">
+                        {task.category}
+                      </Badge>
+                    )}
+                    <span className="text-xs text-muted-foreground">
+                      {STATUS_LABEL[task.status] ?? task.status}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </section>
+
+      <Separator />
+
+      {/* Weekly view */}
+      <section>
+        <WeeklyCalendarView
+          currentDate={weekDate}
+          onWeekChange={setWeekDate}
+          tasks={weeklyTasks}
+          onTaskClick={handleTaskClick}
+        />
+      </section>
+
+      <TaskForm
+        open={formOpen}
+        onOpenChange={setFormOpen}
+        task={editingTask}
+        onSuccess={handleFormSuccess}
       />
 
-      {selectedDate && (
-        <div className="space-y-3 rounded-lg border p-4">
-          <h2 className="font-semibold">
-            {selectedDate.toLocaleDateString("pt-BR", {
-              weekday: "long",
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </h2>
-
-          {selectedDateTasks.length === 0 ? (
-            <p className="text-sm text-muted-foreground">Nenhuma tarefa neste dia.</p>
-          ) : (
-            <ul className="space-y-2">
-              {selectedDateTasks.map((task) => (
-                <li
-                  key={task.occurrence_id}
-                  className="flex items-center gap-3 rounded-md border px-3 py-2 text-sm"
-                >
-                  <span
-                    className={`h-2 w-2 rounded-full flex-shrink-0 ${STATUS_DOT[task.status] ?? "bg-muted-foreground"}`}
-                  />
-                  <span className="flex-1 font-medium">{task.name}</span>
-                  {task.due_time && (
-                    <span className="text-xs text-muted-foreground">
-                      {task.due_time.slice(0, 5)}
-                    </span>
-                  )}
-                  {task.category && (
-                    <Badge variant="secondary" className="text-xs">
-                      {task.category}
-                    </Badge>
-                  )}
-                  <span className="text-xs text-muted-foreground">
-                    {STATUS_LABEL[task.status] ?? task.status}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
+      <Toaster position="bottom-right" richColors />
     </div>
   );
 }
