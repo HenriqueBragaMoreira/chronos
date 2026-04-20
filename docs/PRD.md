@@ -543,7 +543,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
       - Badge com categoria
       - Refs: FR-018
 
-11.12 [not started] Implementar página dashboard.tsx completa
+11.12 [done] Implementar página dashboard.tsx completa
       - Layout em grid responsivo com todos os cards
       - Buscar dados de todas as métricas no mount
       - Loading state (skeleton cards)
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 : 11/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 : 12/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 82/103 tarefas concluídas
+TOTAL                                          : 83/103 tarefas concluídas
