@@ -527,7 +527,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Ícone de fogo/troféu
      - Refs: FR-015
 
-11.9 [not started] Criar componente CategoryChart
+11.9 [done] Criar componente CategoryChart
      - Gráfico de pizza ou barras com distribuição por categoria
      - Legendas com nomes e contagens
      - Refs: FR-016
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  8/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  9/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 79/103 tarefas concluídas
+TOTAL                                          : 80/103 tarefas concluídas
