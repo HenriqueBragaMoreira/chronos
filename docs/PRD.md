@@ -514,7 +514,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Retornar top 5 ordenadas por frequência decrescente
      - Refs: FR-018, BR-013
 
-11.7 [not started] Criar componente CompletionRateCard
+11.7 [done] Criar componente CompletionRateCard
      - Exibir score % em destaque
      - Indicador visual: verde (>70%), amarelo (40-70%), vermelho (<40%)
      - Breakdown: no prazo / atrasadas / não feitas
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  6/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  7/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 77/103 tarefas concluídas
+TOTAL                                          : 78/103 tarefas concluídas
