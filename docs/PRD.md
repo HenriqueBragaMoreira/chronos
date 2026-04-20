@@ -490,7 +490,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Retornar: { on_time: number, late: number, missed: number, rate: number }
      - Refs: FR-014, BR-011
 
-11.3 [not started] Implementar command get_streak
+11.3 [done] Implementar command get_streak
      - Calcular dias consecutivos sem tarefas atrasadas (a partir de hoje)
      - Calcular recorde histórico de streak
      - Retornar: { current: number, record: number }
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  2/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  3/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 73/103 tarefas concluídas
+TOTAL                                          : 74/103 tarefas concluídas

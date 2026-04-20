@@ -1,4 +1,4 @@
-use chrono::{Datelike, Utc};
+use chrono::{Datelike, NaiveDate, Utc};
 use serde::Serialize;
 
 use crate::AppState;
@@ -66,4 +66,76 @@ pub async fn get_completion_rate(
     };
 
     Ok(CompletionRate { on_time, late, missed, rate })
+}
+
+#[derive(Serialize)]
+pub struct Streak {
+    pub current: i64,
+    pub record: i64,
+}
+
+#[tauri::command]
+pub async fn get_streak(state: tauri::State<'_, AppState>) -> Result<Streak, String> {
+    let today = Utc::now().date_naive();
+
+    // All distinct dates with at least one uncompleted occurrence in the past
+    let missed_dates = sqlx::query_scalar::<_, NaiveDate>(
+        r#"
+        SELECT DISTINCT o.due_date
+        FROM task_occurrences o
+        INNER JOIN tasks t ON t.id = o.task_id
+        WHERE t.is_deleted = false
+          AND o.completed = false
+          AND o.due_date < $1
+        ORDER BY o.due_date ASC
+        "#,
+    )
+    .bind(today)
+    .fetch_all(&state.db)
+    .await
+    .map_err(|e| format!("Failed to fetch missed dates: {}", e))?;
+
+    // Earliest occurrence date across all tasks (to anchor the streak start)
+    let first_date = sqlx::query_scalar::<_, Option<NaiveDate>>(
+        r#"
+        SELECT MIN(o.due_date)
+        FROM task_occurrences o
+        INNER JOIN tasks t ON t.id = o.task_id
+        WHERE t.is_deleted = false
+        "#,
+    )
+    .fetch_one(&state.db)
+    .await
+    .map_err(|e| format!("Failed to fetch first date: {}", e))?;
+
+    // Current streak = clean days from (last_miss + 1) up to yesterday
+    let current: i64 = match missed_dates.last() {
+        Some(&last_miss) => ((today - last_miss).num_days() - 1).max(0),
+        None => match first_date {
+            Some(fd) => (today - fd).num_days(),
+            None => 0,
+        },
+    };
+
+    // Record = longest clean gap across all history
+    let record: i64 = if missed_dates.is_empty() {
+        current
+    } else {
+        let mut best: i64 = current;
+
+        // Gap from first task date up to (but not including) first miss
+        if let Some(fd) = first_date {
+            best = best.max((missed_dates[0] - fd).num_days());
+        }
+
+        // Gaps between consecutive miss dates
+        for window in missed_dates.windows(2) {
+            let gap = (window[1] - window[0]).num_days() - 1;
+            best = best.max(gap);
+        }
+
+        best
+    };
+
+    Ok(Streak { current, record })
 }

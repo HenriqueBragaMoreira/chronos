@@ -56,6 +56,7 @@ pub fn run() {
             commands::tasks::get_tasks_by_date_range,
             commands::tasks::refresh_tray_badge,
             commands::dashboard::get_completion_rate,
+            commands::dashboard::get_streak,
             commands::settings::get_settings,
             commands::settings::update_settings,
         ])
