@@ -139,3 +139,44 @@ pub async fn get_streak(state: tauri::State<'_, AppState>) -> Result<Streak, Str
 
     Ok(Streak { current, record })
 }
+
+#[derive(Serialize)]
+pub struct CategoryCount {
+    pub category: String,
+    pub pending: i64,
+    pub completed: i64,
+}
+
+#[tauri::command]
+pub async fn get_category_distribution(
+    state: tauri::State<'_, AppState>,
+) -> Result<Vec<CategoryCount>, String> {
+    let rows = sqlx::query_as::<_, (String, i64, i64)>(
+        r#"
+        SELECT
+            COALESCE(t.category, 'Sem categoria') AS category,
+            COUNT(*) FILTER (WHERE o.completed = false) AS pending,
+            COUNT(*) FILTER (WHERE o.completed = true)  AS completed
+        FROM tasks t
+        INNER JOIN task_occurrences o ON o.task_id = t.id
+        WHERE t.is_deleted = false
+          AND o.id = (
+              SELECT o2.id FROM task_occurrences o2
+              WHERE o2.task_id = t.id
+              ORDER BY o2.due_date DESC
+              LIMIT 1
+          )
+        GROUP BY COALESCE(t.category, 'Sem categoria')
+        ORDER BY (COUNT(*) FILTER (WHERE o.completed = false) +
+                  COUNT(*) FILTER (WHERE o.completed = true)) DESC
+        "#,
+    )
+    .fetch_all(&state.db)
+    .await
+    .map_err(|e| format!("Failed to fetch category distribution: {}", e))?;
+
+    Ok(rows
+        .into_iter()
+        .map(|(category, pending, completed)| CategoryCount { category, pending, completed })
+        .collect())
+}

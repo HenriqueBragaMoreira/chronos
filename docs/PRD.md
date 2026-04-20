@@ -496,7 +496,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Retornar: { current: number, record: number }
      - Refs: FR-015, BR-012
 
-11.4 [not started] Implementar command get_category_distribution
+11.4 [done] Implementar command get_category_distribution
      - Agrupar tarefas por categoria
      - Contar pendentes + concluídas por categoria
      - Retornar: Vec<{ category: string, count: number }>
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  3/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  4/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 74/103 tarefas concluídas
+TOTAL                                          : 75/103 tarefas concluídas

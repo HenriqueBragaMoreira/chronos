@@ -57,6 +57,7 @@ pub fn run() {
             commands::tasks::refresh_tray_badge,
             commands::dashboard::get_completion_rate,
             commands::dashboard::get_streak,
+            commands::dashboard::get_category_distribution,
             commands::settings::get_settings,
             commands::settings::update_settings,
         ])
