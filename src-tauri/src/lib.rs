@@ -59,6 +59,7 @@ pub fn run() {
             commands::dashboard::get_streak,
             commands::dashboard::get_category_distribution,
             commands::dashboard::get_history,
+            commands::dashboard::get_most_forgotten,
             commands::settings::get_settings,
             commands::settings::update_settings,
         ])

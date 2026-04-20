@@ -256,3 +256,65 @@ pub async fn get_history(
         .map(|(period, completed, pending)| HistoryEntry { period, completed, pending })
         .collect())
 }
+
+#[derive(Serialize)]
+pub struct MostForgotten {
+    pub id: String,
+    pub name: String,
+    pub category: Option<String>,
+    pub total: i64,
+    pub missed: i64,
+    pub frequency: f64,
+}
+
+#[tauri::command]
+pub async fn get_most_forgotten(
+    state: tauri::State<'_, AppState>,
+) -> Result<Vec<MostForgotten>, String> {
+    let today = Utc::now().date_naive();
+
+    let rows = sqlx::query_as::<_, (uuid::Uuid, String, Option<String>, i64, i64, f64)>(
+        r#"
+        SELECT
+            t.id,
+            t.name,
+            t.category,
+            COUNT(*)                                    AS total,
+            COUNT(*) FILTER (
+                WHERE (o.completed = false AND o.due_date < $1)
+                   OR (o.completed = true  AND o.completed_at::date > o.due_date)
+            )                                           AS missed,
+            COALESCE(
+                COUNT(*) FILTER (
+                    WHERE (o.completed = false AND o.due_date < $1)
+                       OR (o.completed = true  AND o.completed_at::date > o.due_date)
+                )::float8 * 100.0 / NULLIF(COUNT(*), 0),
+                0.0
+            )                                           AS frequency
+        FROM tasks t
+        INNER JOIN task_occurrences o ON o.task_id = t.id
+        WHERE t.is_deleted = false
+          AND t.recurrence_type != 'none'
+        GROUP BY t.id, t.name, t.category
+        HAVING COUNT(*) > 0
+        ORDER BY frequency DESC, missed DESC
+        LIMIT 5
+        "#,
+    )
+    .bind(today)
+    .fetch_all(&state.db)
+    .await
+    .map_err(|e| format!("Failed to fetch most forgotten: {}", e))?;
+
+    Ok(rows
+        .into_iter()
+        .map(|(id, name, category, total, missed, frequency)| MostForgotten {
+            id: id.to_string(),
+            name,
+            category,
+            total,
+            missed,
+            frequency,
+        })
+        .collect())
+}

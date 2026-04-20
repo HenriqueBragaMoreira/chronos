@@ -508,7 +508,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Retornar: Vec<{ period: string, completed: number, pending: number }>
      - Refs: FR-017
 
-11.6 [not started] Implementar command get_most_forgotten
+11.6 [done] Implementar command get_most_forgotten
      - Calcular frequência de atraso por tarefa recorrente
      - Frequência = vezes atrasada / total de occurrences × 100
      - Retornar top 5 ordenadas por frequência decrescente
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  5/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  6/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 76/103 tarefas concluídas
+TOTAL                                          : 77/103 tarefas concluídas
