@@ -521,7 +521,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Seletor de período (semana/mês/ano)
      - Refs: FR-014
 
-11.8 [not started] Criar componente StreakCard
+11.8 [done] Criar componente StreakCard
      - Número grande com streak atual
      - Subtítulo com recorde
      - Ícone de fogo/troféu
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  7/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  8/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 78/103 tarefas concluídas
+TOTAL                                          : 79/103 tarefas concluídas
