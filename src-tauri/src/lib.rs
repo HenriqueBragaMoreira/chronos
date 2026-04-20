@@ -58,6 +58,7 @@ pub fn run() {
             commands::dashboard::get_completion_rate,
             commands::dashboard::get_streak,
             commands::dashboard::get_category_distribution,
+            commands::dashboard::get_history,
             commands::settings::get_settings,
             commands::settings::update_settings,
         ])

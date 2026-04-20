@@ -180,3 +180,79 @@ pub async fn get_category_distribution(
         .map(|(category, pending, completed)| CategoryCount { category, pending, completed })
         .collect())
 }
+
+#[derive(Serialize)]
+pub struct HistoryEntry {
+    pub period: String,
+    pub completed: i64,
+    pub pending: i64,
+}
+
+#[tauri::command]
+pub async fn get_history(
+    state: tauri::State<'_, AppState>,
+    granularity: String,
+) -> Result<Vec<HistoryEntry>, String> {
+    let today = Utc::now().date_naive();
+
+    let rows: Vec<(String, i64, i64)> = match granularity.as_str() {
+        "week" => {
+            // Last 8 weeks, grouped by ISO week (YYYY-WW)
+            let start = today - chrono::Duration::weeks(7);
+            sqlx::query_as::<_, (String, i64, i64)>(
+                r#"
+                SELECT
+                    TO_CHAR(DATE_TRUNC('week', o.due_date), 'IYYY-IW') AS period,
+                    COUNT(*) FILTER (WHERE o.completed = true)  AS completed,
+                    COUNT(*) FILTER (WHERE o.completed = false) AS pending
+                FROM task_occurrences o
+                INNER JOIN tasks t ON t.id = o.task_id
+                WHERE t.is_deleted = false
+                  AND o.due_date >= $1
+                  AND o.due_date <= $2
+                GROUP BY DATE_TRUNC('week', o.due_date)
+                ORDER BY DATE_TRUNC('week', o.due_date) ASC
+                "#,
+            )
+            .bind(start)
+            .bind(today)
+            .fetch_all(&state.db)
+            .await
+            .map_err(|e| format!("Failed to fetch history: {}", e))?
+        }
+        "month" => {
+            // Last 12 months, grouped by month (YYYY-MM)
+            let start = today
+                .with_day(1)
+                .unwrap_or(today)
+                .checked_sub_months(chrono::Months::new(11))
+                .unwrap_or(today);
+            sqlx::query_as::<_, (String, i64, i64)>(
+                r#"
+                SELECT
+                    TO_CHAR(DATE_TRUNC('month', o.due_date), 'YYYY-MM') AS period,
+                    COUNT(*) FILTER (WHERE o.completed = true)  AS completed,
+                    COUNT(*) FILTER (WHERE o.completed = false) AS pending
+                FROM task_occurrences o
+                INNER JOIN tasks t ON t.id = o.task_id
+                WHERE t.is_deleted = false
+                  AND o.due_date >= $1
+                  AND o.due_date <= $2
+                GROUP BY DATE_TRUNC('month', o.due_date)
+                ORDER BY DATE_TRUNC('month', o.due_date) ASC
+                "#,
+            )
+            .bind(start)
+            .bind(today)
+            .fetch_all(&state.db)
+            .await
+            .map_err(|e| format!("Failed to fetch history: {}", e))?
+        }
+        _ => return Err(format!("Invalid granularity: {}", granularity)),
+    };
+
+    Ok(rows
+        .into_iter()
+        .map(|(period, completed, pending)| HistoryEntry { period, completed, pending })
+        .collect())
+}

@@ -502,7 +502,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Retornar: Vec<{ category: string, count: number }>
      - Refs: FR-016
 
-11.5 [not started] Implementar command get_history
+11.5 [done] Implementar command get_history
      - Parâmetros: granularity (week/month)
      - Agrupar occurrences por período
      - Retornar: Vec<{ period: string, completed: number, pending: number }>
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  4/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 :  5/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 75/103 tarefas concluídas
+TOTAL                                          : 76/103 tarefas concluídas
