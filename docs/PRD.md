@@ -532,7 +532,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
      - Legendas com nomes e contagens
      - Refs: FR-016
 
-11.10 [not started] Criar componente HistoryChart
+11.10 [done] Criar componente HistoryChart
       - Gráfico de barras empilhadas: feitas vs pendentes por período
       - Toggle semana/mês
       - Refs: FR-017
@@ -671,10 +671,10 @@ Fase  7 — Testes: CRUD & Recorrência (API)     :  6/6  tarefas concluídas
 Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
-Fase 11 — Dashboard (API + UI)                 :  9/12 tarefas concluídas
+Fase 11 — Dashboard (API + UI)                 : 10/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 80/103 tarefas concluídas
+TOTAL                                          : 81/103 tarefas concluídas
