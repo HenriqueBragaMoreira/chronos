@@ -565,7 +565,7 @@ FASE 12 — TESTES DO FRONTEND (DESKTOP-UI)
      - Modo criação vs edição (preenchimento de valores)
      - Refs: FR-001, FR-002, FR-006
 
-12.3 [not started] Escrever testes para TaskList e TaskItem
+12.3 [done] Escrever testes para TaskList e TaskItem
      - Renderização da lista com dados mock
      - Filtros alteram tarefas exibidas
      - Checkbox de conclusão chama invoke
@@ -672,9 +672,9 @@ Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 : 12/12 tarefas concluídas
-Fase 12 — Testes do Frontend (UI)              :  2/5  tarefas concluídas
+Fase 12 — Testes do Frontend (UI)              :  3/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 85/103 tarefas concluídas
+TOTAL                                          : 86/103 tarefas concluídas
