@@ -578,7 +578,7 @@ FASE 12 — TESTES DO FRONTEND (DESKTOP-UI)
      - Gráficos renderizam sem erro com dados mock
      - Refs: FR-014, FR-015
 
-12.5 [not started] Escrever testes para componentes do Calendário
+12.5 [done] Escrever testes para componentes do Calendário
      - MonthlyCalendarView renderiza dias do mês correto
      - Navegação mês anterior/próximo funciona
      - Tarefas aparecem nos dias corretos
@@ -672,9 +672,9 @@ Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 : 12/12 tarefas concluídas
-Fase 12 — Testes do Frontend (UI)              :  4/5  tarefas concluídas
+Fase 12 — Testes do Frontend (UI)              :  5/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 87/103 tarefas concluídas
+TOTAL                                          : 88/103 tarefas concluídas
