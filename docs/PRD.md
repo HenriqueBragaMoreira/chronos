@@ -572,7 +572,7 @@ FASE 12 — TESTES DO FRONTEND (DESKTOP-UI)
      - Badge de atraso exibe dias corretos
      - Refs: FR-004, FR-005, FR-008
 
-12.4 [not started] Escrever testes para componentes do Dashboard
+12.4 [done] Escrever testes para componentes do Dashboard
      - CompletionRateCard exibe score correto
      - StreakCard exibe streak e recorde
      - Gráficos renderizam sem erro com dados mock
@@ -672,9 +672,9 @@ Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 : 12/12 tarefas concluídas
-Fase 12 — Testes do Frontend (UI)              :  3/5  tarefas concluídas
+Fase 12 — Testes do Frontend (UI)              :  4/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 86/103 tarefas concluídas
+TOTAL                                          : 87/103 tarefas concluídas
