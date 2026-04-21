@@ -559,7 +559,7 @@ FASE 12 — TESTES DO FRONTEND (DESKTOP-UI)
      - Adicionar script "test" no package.json
      - Refs: NFR-005
 
-12.2 [not started] Escrever testes para TaskForm
+12.2 [done] Escrever testes para TaskForm
      - Validação de campos obrigatórios
      - Exibição condicional de valor de recorrência
      - Modo criação vs edição (preenchimento de valores)
@@ -672,9 +672,9 @@ Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 : 12/12 tarefas concluídas
-Fase 12 — Testes do Frontend (UI)              :  1/5  tarefas concluídas
+Fase 12 — Testes do Frontend (UI)              :  2/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 84/103 tarefas concluídas
+TOTAL                                          : 85/103 tarefas concluídas
