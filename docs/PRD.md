@@ -553,7 +553,7 @@ FASE 11 — DASHBOARD (API + DESKTOP-UI)
 FASE 12 — TESTES DO FRONTEND (DESKTOP-UI)
 ================================================================================
 
-12.1 [not started] Configurar Vitest + React Testing Library no projeto
+12.1 [done] Configurar Vitest + React Testing Library no projeto
      - Instalar vitest, @testing-library/react, @testing-library/jest-dom
      - Configurar vitest.config.ts com jsdom environment
      - Adicionar script "test" no package.json
@@ -672,9 +672,9 @@ Fase  8 — Configurações (API + UI)             :  5/5  tarefas concluídas
 Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 : 12/12 tarefas concluídas
-Fase 12 — Testes do Frontend (UI)              :  0/5  tarefas concluídas
+Fase 12 — Testes do Frontend (UI)              :  1/5  tarefas concluídas
 Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 83/103 tarefas concluídas
+TOTAL                                          : 84/103 tarefas concluídas
