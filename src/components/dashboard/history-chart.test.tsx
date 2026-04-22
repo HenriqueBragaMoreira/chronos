@@ -38,7 +38,7 @@ describe("HistoryChart", () => {
     render(<HistoryChart />);
 
     await waitFor(() => {
-      expect(screen.getByText(/nenhum dado para o período/i)).toBeInTheDocument();
+      expect(screen.getByText(/sem histórico/i)).toBeInTheDocument();
     });
   });
 

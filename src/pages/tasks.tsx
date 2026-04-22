@@ -78,6 +78,7 @@ export default function TasksPage() {
 
       <TaskList
         onEditTask={handleEditTask}
+        onCreateTask={handleNewTask}
         refreshKey={refreshKey}
       />
 

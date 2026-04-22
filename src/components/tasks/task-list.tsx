@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { ClipboardList } from "lucide-react";
 import { TaskItem } from "./task-item";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   Select,
   SelectContent,
@@ -30,10 +32,11 @@ interface TaskData {
 
 interface TaskListProps {
   onEditTask: (task: TaskData) => void;
+  onCreateTask?: () => void;
   refreshKey: number;
 }
 
-export function TaskList({ onEditTask, refreshKey }: TaskListProps) {
+export function TaskList({ onEditTask, onCreateTask, refreshKey }: TaskListProps) {
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("all");
@@ -130,14 +133,12 @@ export function TaskList({ onEditTask, refreshKey }: TaskListProps) {
       </div>
 
       {tasks.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-12 text-center">
-          <p className="text-lg font-medium text-muted-foreground">
-            Nenhuma tarefa encontrada
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">
-            Crie sua primeira tarefa clicando no botão acima!
-          </p>
-        </div>
+        <EmptyState
+          icon={ClipboardList}
+          title="Nenhuma tarefa encontrada"
+          description="Crie sua primeira tarefa para começar a organizar o seu dia!"
+          action={onCreateTask ? { label: "Nova Tarefa", onClick: onCreateTask } : undefined}
+        />
       ) : (
         <div className="space-y-2">
           {tasks.map((task) => (

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { BarChart2 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   BarChart,
   Bar,
@@ -44,9 +46,11 @@ export function CategoryChart() {
           ))}
         </div>
       ) : data.length === 0 ? (
-        <p className="text-sm text-muted-foreground text-center py-10">
-          Nenhuma tarefa cadastrada.
-        </p>
+        <EmptyState
+          icon={BarChart2}
+          title="Sem dados ainda"
+          description="Comece adicionando tarefas para ver suas métricas."
+        />
       ) : (
         <ResponsiveContainer width="100%" height={chartHeight}>
           <BarChart

@@ -594,7 +594,7 @@ FASE 13 — POLISH & ACESSIBILIDADE (DESKTOP-UI)
      - Skeleton para calendário
      - Refs: NFR-003
 
-13.2 [not started] Adicionar empty states com ilustração e CTA
+13.2 [done] Adicionar empty states com ilustração e CTA
      - Lista vazia: "Nenhuma tarefa encontrada. Crie sua primeira tarefa!"
      - Dashboard sem dados: "Comece adicionando tarefas para ver suas métricas"
      - Refs: FR-005
@@ -673,8 +673,8 @@ Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 : 12/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  5/5  tarefas concluídas
-Fase 13 — Polish & Acessibilidade (UI)         :  1/5  tarefas concluídas
+Fase 13 — Polish & Acessibilidade (UI)         :  2/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 89/103 tarefas concluídas
+TOTAL                                          : 90/103 tarefas concluídas

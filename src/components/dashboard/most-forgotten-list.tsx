@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/ui/empty-state";
 
 interface MostForgotten {
   id: string;
@@ -42,9 +44,11 @@ export function MostForgottenList() {
           ))}
         </div>
       ) : data.length === 0 ? (
-        <p className="text-sm text-muted-foreground text-center py-8">
-          Nenhuma tarefa recorrente com atrasos.
-        </p>
+        <EmptyState
+          icon={Trophy}
+          title="Tudo em dia!"
+          description="Nenhuma tarefa recorrente com atrasos."
+        />
       ) : (
         <ol className="space-y-3">
           {data.map((item, i) => (

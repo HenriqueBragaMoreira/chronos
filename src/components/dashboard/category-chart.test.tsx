@@ -31,7 +31,7 @@ describe("CategoryChart", () => {
     render(<CategoryChart />);
 
     await waitFor(() => {
-      expect(screen.getByText(/nenhuma tarefa cadastrada/i)).toBeInTheDocument();
+      expect(screen.getByText(/sem dados ainda/i)).toBeInTheDocument();
     });
   });
 

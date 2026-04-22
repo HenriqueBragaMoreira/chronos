@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { History } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   BarChart,
   Bar,
@@ -80,9 +82,11 @@ export function HistoryChart() {
       {loading ? (
         <Skeleton className="h-[220px] w-full" />
       ) : data.length === 0 ? (
-        <p className="text-sm text-muted-foreground text-center py-12">
-          Nenhum dado para o período.
-        </p>
+        <EmptyState
+          icon={History}
+          title="Sem histórico"
+          description="Comece adicionando tarefas para ver suas métricas."
+        />
       ) : (
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={data} margin={{ top: 0, right: 8, left: -16, bottom: 0 }}>
