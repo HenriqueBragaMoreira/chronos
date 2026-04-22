@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   BarChart,
   Bar,
@@ -77,9 +78,7 @@ export function HistoryChart() {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-48">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-        </div>
+        <Skeleton className="h-[220px] w-full" />
       ) : data.length === 0 ? (
         <p className="text-sm text-muted-foreground text-center py-12">
           Nenhum dado para o período.

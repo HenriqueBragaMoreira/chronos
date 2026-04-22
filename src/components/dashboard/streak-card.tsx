@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface StreakData {
   current: number;
@@ -24,8 +25,13 @@ export function StreakCard() {
       </h3>
 
       {loading ? (
-        <div className="flex items-center justify-center h-20">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        <div className="space-y-3">
+          <div className="flex items-end gap-3">
+            <Skeleton className="h-12 w-20" />
+            <Skeleton className="h-7 w-10" />
+            <Skeleton className="h-8 w-8 rounded-full" />
+          </div>
+          <Skeleton className="h-4 w-2/3" />
         </div>
       ) : (
         <div className="flex items-end gap-4">

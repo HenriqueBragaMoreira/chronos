@@ -6,6 +6,7 @@ import { WeeklyCalendarView, type WeeklyTask } from "@/components/calendar/weekl
 import { TaskForm } from "@/components/tasks/task-form";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface TaskData {
   id: string;
@@ -67,12 +68,14 @@ export default function CalendarPage() {
   });
   const [weekDate, setWeekDate] = useState(() => new Date());
   const [tasks, setTasks] = useState<TaskData[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<TaskData | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
 
   const fetchTasks = useCallback(async (start: string, end: string) => {
+    setLoading(true);
     try {
       const result = await invoke<TaskData[]>("get_tasks_by_date_range", {
         startDate: start,
@@ -81,6 +84,8 @@ export default function CalendarPage() {
       setTasks(result);
     } catch (err) {
       console.error("Erro ao buscar tarefas:", err);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -197,7 +202,22 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      {view === "monthly" && (
+      {loading && (
+        <div className="space-y-4">
+          <div className="grid grid-cols-7 gap-1">
+            {[...Array(7)].map((_, i) => (
+              <Skeleton key={i} className="h-6 w-full" />
+            ))}
+          </div>
+          <div className="grid grid-cols-7 gap-1">
+            {[...Array(35)].map((_, i) => (
+              <Skeleton key={i} className="h-20 w-full rounded-md" />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!loading && view === "monthly" && (
         <section>
           <MonthlyCalendarView
             currentDate={currentDate}
@@ -256,7 +276,7 @@ export default function CalendarPage() {
         </section>
       )}
 
-      {view === "weekly" && (
+      {!loading && view === "weekly" && (
         <section>
           <WeeklyCalendarView
             currentDate={weekDate}

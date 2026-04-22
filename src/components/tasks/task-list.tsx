@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { TaskItem } from "./task-item";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
   SelectContent,
@@ -72,7 +73,7 @@ export function TaskList({ onEditTask, refreshKey }: TaskListProps) {
     return (
       <div className="space-y-3">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="h-16 animate-pulse rounded-lg bg-muted" />
+          <Skeleton key={i} className="h-16 rounded-lg" />
         ))}
       </div>
     );

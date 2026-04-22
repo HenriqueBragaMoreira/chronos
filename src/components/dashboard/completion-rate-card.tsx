@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CompletionRate {
   on_time: number;
@@ -69,8 +70,13 @@ export function CompletionRateCard() {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-28">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        <div className="flex items-center gap-6">
+          <Skeleton className="h-[88px] w-[88px] flex-shrink-0 rounded-full" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-1/2" />
+          </div>
         </div>
       ) : (
         <div className="flex items-center gap-6">

@@ -588,7 +588,7 @@ FASE 12 — TESTES DO FRONTEND (DESKTOP-UI)
 FASE 13 — POLISH & ACESSIBILIDADE (DESKTOP-UI)
 ================================================================================
 
-13.1 [not started] Adicionar loading states (skeleton) em todas as páginas
+13.1 [done] Adicionar loading states (skeleton) em todas as páginas
      - Skeleton para lista de tarefas
      - Skeleton para cards do dashboard
      - Skeleton para calendário
@@ -673,8 +673,8 @@ Fase  9 — Tray Icon & Notificações (API)       :  7/7  tarefas concluídas
 Fase 10 — Calendário (UI)                      :  7/7  tarefas concluídas
 Fase 11 — Dashboard (API + UI)                 : 12/12 tarefas concluídas
 Fase 12 — Testes do Frontend (UI)              :  5/5  tarefas concluídas
-Fase 13 — Polish & Acessibilidade (UI)         :  0/5  tarefas concluídas
+Fase 13 — Polish & Acessibilidade (UI)         :  1/5  tarefas concluídas
 Fase 14 — Auth & Supabase                      :  0/5  tarefas (deferred)
 Fase 15 — Mobile                               :  0/4  tarefas (deferred)
 --------------------------------------------------------------------------
-TOTAL                                          : 88/103 tarefas concluídas
+TOTAL                                          : 89/103 tarefas concluídas

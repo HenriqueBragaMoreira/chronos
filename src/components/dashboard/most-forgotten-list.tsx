@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface MostForgotten {
   id: string;
@@ -35,8 +36,10 @@ export function MostForgottenList() {
       </h3>
 
       {loading ? (
-        <div className="flex items-center justify-center h-32">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        <div className="space-y-3">
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} className="h-10 w-full" />
+          ))}
         </div>
       ) : data.length === 0 ? (
         <p className="text-sm text-muted-foreground text-center py-8">

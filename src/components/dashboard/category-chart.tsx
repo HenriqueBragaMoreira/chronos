@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   BarChart,
   Bar,
@@ -37,8 +38,10 @@ export function CategoryChart() {
       </h3>
 
       {loading ? (
-        <div className="flex items-center justify-center h-40">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        <div className="space-y-3">
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} className="h-8 w-full" />
+          ))}
         </div>
       ) : data.length === 0 ? (
         <p className="text-sm text-muted-foreground text-center py-10">
